@@ -1,153 +1,125 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>澪花 腹部コース インストラクター指導システム</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; display: flex; justify-content: center; align-items: center; padding: 20px; }
-        .container { background: white; border-radius: 12px; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2); max-width: 500px; width: 100%; padding: 40px; }
-        .header { text-align: center; margin-bottom: 30px; }
-        .header h1 { font-size: 24px; color: #333; margin-bottom: 10px; }
-        .header p { font-size: 14px; color: #666; }
-        .form-group { margin-bottom: 20px; }
-        label { display: block; margin-bottom: 8px; font-size: 14px; font-weight: 500; color: #333; }
-        input[type="email"], input[type="text"], input[type="password"], select, textarea { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 6px; font-size: 14px; font-family: inherit; transition: border-color 0.3s; }
-        input:focus, select:focus, textarea:focus { outline: none; border-color: #667eea; box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1); }
-        button { width: 100%; padding: 12px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; border-radius: 6px; font-size: 16px; font-weight: 600; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; }
-        button:hover { transform: translateY(-2px); box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4); }
-        button:active { transform: translateY(0); }
-        .message { padding: 12px; border-radius: 6px; margin-bottom: 20px; display: none; }
-        .message.success { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; display: block; }
-        .message.error { background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; display: block; }
-        .loading { display: none; text-align: center; color: #666; }
-        .spinner { border: 3px solid #f3f3f3; border-top: 3px solid #667eea; border-radius: 50%; width: 30px; height: 30px; animation: spin 1s linear infinite; margin: 0 auto 10px; }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        .tab-buttons { display: flex; gap: 10px; margin-bottom: 30px; }
-        .tab-btn { flex: 1; padding: 10px; background: #f0f0f0; border: 2px solid #ddd; border-radius: 6px; cursor: pointer; font-weight: 500; transition: all 0.3s; }
-        .tab-btn.active { background: #667eea; color: white; border-color: #667eea; }
-        .tab-content { display: none; }
-        .tab-content.active { display: block; }
-        .info-box { background: #e7f3ff; border-left: 4px solid #2196F3; padding: 12px; margin-bottom: 20px; border-radius: 4px; font-size: 13px; color: #1565c0; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>澪花 腹部コース｜インストラクター指導システム</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#faf8f5; --card:#ffffff; --accent:#c4523b; --accent-light:#f3e8e4;
+  --text:#2c2420; --sub:#7a6e64; --border:#e8e0d8;
+  --gold:#b8964e; --gold-light:#f5f0e4; --green:#5a8a5e; --green-light:#e8f0e8;
+  --blue:#4a7a9a; --blue-light:#e4eef4; --purple:#7a5a8a; --purple-light:#f0e8f4;
+  --red:#c45050; --red-light:#fceaea; --orange:#d4874e; --orange-light:#fdf3e8;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Noto Serif JP','Hiragino Mincho Pro',serif; background:var(--bg); color:var(--text); -webkit-tap-highlight-color:transparent; }
+button { font-family:inherit; cursor:pointer; }
+input,textarea,select { font-family:inherit; }
+.container { max-width:700px; margin:0 auto; padding:16px; }
+.login-wrap { min-height:100vh; display:flex; align-items:center; justify-content:center; padding:24px; }
+.login-box { background:var(--card); border-radius:20px; padding:48px 32px; max-width:400px; width:100%; box-shadow:0 8px 32px rgba(0,0,0,0.08); text-align:center; }
+.login-box h1 { color:var(--accent); font-size:22px; font-weight:600; margin:0 0 4px; }
+.login-box .sub { color:var(--sub); font-size:14px; margin:0 0 28px; }
+.login-input { width:100%; padding:14px 16px; border-radius:12px; border:1px solid var(--border); font-size:15px; background:var(--bg); text-align:center; outline:none; }
+.login-btn { margin-top:14px; width:100%; padding:14px; border-radius:12px; background:var(--accent); color:#fff; border:none; font-size:16px; font-weight:600; }
+.login-error { color:var(--red); font-size:13px; margin-top:12px; }
+.login-loading { color:var(--sub); font-size:13px; margin-top:12px; }
+.header { background:var(--card); border-bottom:2px solid var(--accent); position:sticky; top:0; z-index:100; }
+.header-top { display:flex; justify-content:space-between; align-items:center; padding:10px 16px; }
+.header-brand { display:flex; align-items:center; gap:8px; color:var(--accent); font-weight:600; font-size:15px; }
+.header-user { display:flex; align-items:center; gap:10px; }
+.header-user span { font-size:13px; color:var(--sub); }
+.header-user button { font-size:12px; color:var(--sub); background:none; border:none; text-decoration:underline; }
+.tab-bar { display:flex; overflow-x:auto; padding:0 8px; }
+.tab-bar button { flex:0 0 auto; padding:10px 12px; border:none; background:none; font-size:13px; color:var(--sub); white-space:nowrap; border-bottom:3px solid transparent; display:flex; align-items:center; gap:4px; }
+.tab-bar button.active { color:var(--accent); font-weight:700; border-bottom-color:var(--accent); }
+.card { background:var(--card); border-radius:16px; padding:20px; box-shadow:0 2px 12px rgba(0,0,0,0.05); margin-bottom:12px; }
+.section-title { font-size:18px; font-weight:700; text-align:center; margin:8px 0 16px; }
+.home-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+.home-card { border-radius:16px; padding:20px 16px; border:none; text-align:left; }
+.home-card .icon { font-size:28px; }
+.home-card h3 { font-size:15px; font-weight:700; margin:8px 0 4px; }
+.home-card p { color:var(--sub); font-size:12px; line-height:1.5; }
+.mod-item { display:flex; align-items:center; gap:14px; padding:16px; background:var(--card); border:1px solid var(--border); border-radius:14px; text-align:left; width:100%; margin-bottom:8px; }
+.mod-icon { width:48px; height:48px; border-radius:12px; background:var(--accent-light); display:flex; align-items:center; justify-content:center; font-size:24px; flex-shrink:0; }
+.mod-num { background:var(--accent); color:#fff; border-radius:6px; padding:2px 8px; font-size:11px; font-weight:700; }
+.mod-title { font-size:16px; font-weight:700; }
+.point-row { display:flex; gap:12px; padding:12px 14px; border-radius:10px; margin-bottom:6px; }
+.point-row:nth-child(odd) { background:rgba(243,232,228,0.4); }
+.point-row:nth-child(even) { background:var(--bg); }
+.point-num { color:var(--accent); font-weight:700; font-size:14px; min-width:24px; }
+.point-text { font-size:15px; line-height:1.7; }
+.step-cat { color:var(--accent); font-size:14px; font-weight:700; margin:0 0 6px; padding:0 4px; }
+.step-item { display:flex; align-items:center; gap:12px; padding:13px 14px; background:var(--card); border:1px solid var(--border); border-radius:12px; text-align:left; width:100%; margin-bottom:4px; }
+.step-num { width:28px; height:28px; border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:700; flex-shrink:0; }
+.step-num.done { background:var(--green); color:#fff; }
+.step-num.recheck { background:var(--orange); color:#fff; }
+.step-num.default { background:var(--accent-light); color:var(--accent); }
+.step-dots { display:flex; justify-content:center; gap:4px; flex-wrap:wrap; margin-bottom:16px; }
+.step-dot { width:7px; height:7px; border-radius:4px; }
+.step-badge { display:inline-block; background:var(--accent-light); color:var(--accent); border-radius:20px; padding:4px 14px; font-size:12px; font-weight:600; margin-bottom:12px; }
+.step-actions { display:flex; gap:8px; justify-content:center; flex-wrap:wrap; margin:16px 0; }
+.btn-done { padding:12px 24px; border-radius:12px; border:none; font-size:14px; font-weight:600; }
+.btn-recheck { padding:12px 24px; border-radius:12px; border:none; font-size:14px; font-weight:600; background:var(--orange); color:#fff; }
+.step-comment-area { width:100%; margin-top:8px; }
+.step-comment-area textarea { width:100%; padding:10px 12px; border-radius:10px; border:1px solid var(--border); font-size:14px; background:var(--bg); resize:vertical; line-height:1.6; min-height:60px; }
+.step-nav { display:flex; gap:12px; justify-content:center; margin-top:16px; }
+.step-nav button { padding:14px 28px; border-radius:12px; font-size:15px; }
+.eval-score-row { margin-bottom:14px; }
+.eval-label { font-size:14px; font-weight:600; margin-bottom:6px; }
+.eval-btns { display:flex; gap:5px; flex-wrap:wrap; }
+.eval-btn { padding:6px 10px; border-radius:8px; font-size:12px; }
+.eval-btn.selected-low { background:#e8a090; color:#fff; border:none; font-weight:700; }
+.eval-btn.selected-mid { background:var(--gold); color:#fff; border:none; font-weight:700; }
+.eval-btn.selected-high { background:var(--green); color:#fff; border:none; font-weight:700; }
+.eval-btn.unselected { background:transparent; color:var(--sub); border:1px solid var(--border); }
+.about-section { margin-bottom:20px; }
+.about-section h3 { color:var(--accent); font-size:15px; font-weight:700; margin-bottom:10px; display:flex; align-items:center; gap:8px; }
+.about-point { padding:10px 14px; border-radius:10px; margin-bottom:6px; font-size:14px; line-height:1.7; }
+.about-point.philosophy { background:var(--accent-light); }
+.about-point.purpose { background:var(--blue-light); }
+.about-point.importance { background:var(--gold-light); }
+.about-point.boundary { background:var(--red-light); color:var(--red); font-weight:600; }
+.report-score-row { display:flex; justify-content:space-between; align-items:center; padding:8px 0; border-bottom:1px solid rgba(232,224,216,0.2); }
+@media(max-width:480px) { .home-grid { grid-template-columns:1fr; } .step-nav button { padding:12px 20px; font-size:14px; } }
+</style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>澪花</h1>
-            <p>腹部コース インストラクター指導システム</p>
-        </div>
-        <div id="message" class="message"></div>
-        <div class="tab-buttons">
-            <button class="tab-btn active" onclick="switchTab('login')">ログイン</button>
-            <button class="tab-btn" onclick="switchTab('register')">登録</button>
-        </div>
-        <div id="login" class="tab-content active">
-            <div class="info-box">📧 メールアドレスでログインしてください</div>
-            <form onsubmit="handleLogin(event)">
-                <div class="form-group">
-                    <label for="login-email">メールアドレス</label>
-                    <input type="email" id="login-email" required placeholder="example@email.com">
-                </div>
-                <button type="submit">ログイン</button>
-            </form>
-        </div>
-        <div id="register" class="tab-content">
-            <div class="info-box">✏️ 新しくアカウントを作成してください</div>
-            <form onsubmit="handleRegister(event)">
-                <div class="form-group">
-                    <label for="register-email">メールアドレス</label>
-                    <input type="email" id="register-email" required placeholder="example@email.com">
-                </div>
-                <div class="form-group">
-                    <label for="register-name">氏名</label>
-                    <input type="text" id="register-name" required placeholder="山田 太郎">
-                </div>
-                <div class="form-group">
-                    <label for="register-password">パスワード</label>
-                    <input type="password" id="register-password" required placeholder="••••••••">
-                </div>
-                <button type="submit">アカウント作成</button>
-            </form>
-        </div>
-        <div class="loading" id="loading">
-            <div class="spinner"></div>
-            <p>処理中...</p>
-        </div>
-    </div>
-    <script>
-        const GAS_URL = "https://script.google.com/macros/s/AKfycbxF-zsPuXNeyT_EqIdiP5ucK3q4go0S2ZFTLCFbofZAdij8wmyqC0H6TpsAmwOxq7TQ/exec";
-        function switchTab(tab) {
-            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
-            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
-            document.getElementById(tab).classList.add('active');
-            event.target.classList.add('active');
-        }
-        function showMessage(message, type) {
-            const messageEl = document.getElementById('message');
-            messageEl.textContent = message;
-            messageEl.className = `message ${type}`;
-            setTimeout(() => { messageEl.className = 'message'; }, 5000);
-        }
-        function showLoading(show) {
-            document.getElementById('loading').style.display = show ? 'block' : 'none';
-        }
-        async function handleLogin(event) {
-            event.preventDefault();
-            const email = document.getElementById('login-email').value;
-            showLoading(true);
-            try {
-                const response = await fetch(GAS_URL, {
-                    method: 'POST',
-                    body: JSON.stringify({ action: 'auth', email: email })
-                });
-                const data = await response.json();
-                if (data.success) {
-                    showMessage('✓ ログインしました。リダイレクト中...', 'success');
-                    setTimeout(() => { window.location.href = '?logged_in=' + email; }, 2000);
-                } else {
-                    showMessage('✗ ' + (data.error || 'ログインに失敗しました'), 'error');
-                }
-            } catch (error) {
-                showMessage('✗ エラーが発生しました: ' + error.message, 'error');
-            }
-            showLoading(false);
-        }
-        async function handleRegister(event) {
-            event.preventDefault();
-            const email = document.getElementById('register-email').value;
-            const name = document.getElementById('register-name').value;
-            showLoading(true);
-            try {
-                const response = await fetch(GAS_URL, {
-                    method: 'POST',
-                    body: JSON.stringify({ action: 'register', email: email, name: name })
-                });
-                const data = await response.json();
-                if (data.success) {
-                    showMessage('✓ 登録が完了しました。ログインしてください', 'success');
-                    document.getElementById('register-email').value = email;
-                    document.getElementById('register-name').value = '';
-                    document.getElementById('login').classList.add('active');
-                    document.getElementById('register').classList.remove('active');
-                    document.querySelectorAll('.tab-btn')[0].classList.add('active');
-                    document.querySelectorAll('.tab-btn')[1].classList.remove('active');
-                } else {
-                    showMessage('✗ ' + (data.error || '登録に失敗しました'), 'error');
-                }
-            } catch (error) {
-                showMessage('✗ エラーが発生しました: ' + error.message, 'error');
-            }
-            showLoading(false);
-        }
-        window.addEventListener('load', () => {
-            const params = new URLSearchParams(window.location.search);
-            if (params.has('logged_in')) {
-                const email = params.get('logged_in');
-                showMessage('✓ ' + email + ' でログイン中です', 'success');
-            }
-        });
-    </script>
+<script>
+const GAS_URL = "https://script.google.com/macros/s/AKfycbxF-zsPuXNeyT_EqIdiP5ucK3q4go0S2ZFTLCFbofZAdij8wmyqC0H6TpsAmwOxq7TQ/exec";
+</script>
+<div id="app"></div>
+<script>
+let state = {view:"login",user:null,theoryMod:null,theoryTopic:null,practiceCur:0,practiceList:true,stepStatus:{},stepComments:{},reportScores:{},reportStudent:"",reportDate:new Date().toISOString().split("T")[0],reportComment:"",reports:[],reportsLoaded:false,saving:false,loginError:"",loginLoading:false,};
+function setState(patch){Object.assign(state,patch);render();}
+const ABOUT={philosophy:["澪（みお）── 水の流れる道・生命の通り道・氣の通り道","花（はな）── 人それぞれが天より授かりし魂の彩。世に一つ 己が花を咲かすもの","澪花は己が身の内にある澪を整え、滞りを解きほぐし、天より授かりし氣を巡らせ、その人ならではの花を咲かせるための手あて"],purpose:["腹部コースは「臓に気づく」ための入口です","筋肉・内臓の生理学をベースに、五臓の基礎と腹部反射ゾーンを学びます","身体と心を五臓で感じ、痛くないアプローチで内臓の手あてをすることが目的です"],importance:["自律神経の中枢","生命を維持する臓器が集まる場所","怒り・悲しみ・不安 ── 言葉にならない感情が積み重なる場所"],boundaries:["腹部コースでは「臓に触れる」ところまでを学びます","「手を育む」ことは本講座（澪花メインコース）でのみ指導します ── 腹部コースでは教えないでください","エネルギーの使い方は腹部コースの範囲外です ── 指導しないでください","臓の触れ方・感じ方を丁寧に伝えることに集中してください"]};
+const THEORY=[{id:"intro",title:"腹部の大切さ",icon:"🌸",topics:[{id:"t1",title:"腹部の大切さ",points:["自律神経の中枢","生命を維持する臓器が集まる","怒り・悲しみ・不安 — 言葉にならない感情が積み重なる場所"]},{id:"t2",title:"澪花腹部の手あて 〜臓に触れる〜",points:["腹部コースは「臓に気づく」ための入口","筋肉・内臓の生理学をベースに、五臓の基礎と腹部反射ゾーンを学ぶ"]}]},{id:"autonomic",title:"自律神経",icon:"⚡",topics:[{id:"a1",title:"神経の分類と働き",points:["神経とは脳と身体の各器官が互いに情報を伝え合う道","中枢神経と末梢神経に分けられる","末梢神経は体制神経と自律神経に分けられる"]},{id:"a2",title:"交感神経と副交感神経",points:["交感神経：活動時、ストレスを受けた時","副交感神経：休息時、睡眠時","1日を通してどちらかが必ず優位になっている","血管（収縮/拡張）、血圧（上昇/下降）、心拍（速い/ゆっくり）","筋肉（緊張/弛緩）、腸（ぜん動抑制/促進）、発汗（促進/抑制）"]},{id:"a3",title:"自律神経の分布",points:["脳から出る12対の神経、脊髄から出る31対の神経","交感神経節は脊椎の両側に並び交感神経幹を作る","頸部3対、胸部10〜12対、腰部4〜5対、仙骨部4〜5対、尾骨1対"]},{id:"a4",title:"自律神経の乱れ",points:["両方がしっかり機能することが整った状態","不眠・イライラ・頭痛・気分の落ち込み・集中力低下","眼精疲労・口渇・首肩のこり・息苦しさ・動悸","吐き気・食欲不振・便秘/下痢・月経不順・頻尿","腰痛・手足のしびれ/冷え・疲れやすい・ほてり","うつ病は脳の神経伝達物質の分泌異常による"]}]}];
+const STEPS=[{id:"h01",title:"タオル上から手をあてる",cat:"準備"},{id:"h02",title:"腹部の確認",cat:"準備"},{id:"h03",title:"触診",cat:"準備"},{id:"h04",title:"鼓音チェック",cat:"準備"},{id:"h05",title:"手を温めオイル塗布",cat:"準備"},{id:"h06",title:"風門を開く",cat:"腹診"},{id:"h07",title:"腹直筋側部 リリース",cat:"筋肉リリース"},{id:"h08",title:"腹直筋上から腹斜筋リリース",cat:"筋肉リリース"},{id:"h09",title:"腹直筋 ライン",cat:"筋肉リリース"},{id:"h10",title:"外腹斜筋",cat:"筋肉リリース"},{id:"h11",title:"内腹斜筋",cat:"筋肉リリース"},{id:"h12",title:"腹横筋",cat:"筋肉リリース"},{id:"h13",title:"左横隔膜",cat:"横隔膜"},{id:"h14",title:"横隔膜 左〜右",cat:"横隔膜"},{id:"h15",title:"肝 胆",cat:"内臓アプローチ"},{id:"h16",title:"脾",cat:"内臓アプローチ"},{id:"h17",title:"心",cat:"内臓アプローチ"},{id:"h18",title:"胃〜肝の癒着",cat:"癒着リリース"},{id:"h19",title:"胃 腸の癒着",cat:"癒着リリース"},{id:"h20",title:"大腸 脾 胃の癒着",cat:"癒着リリース"},{id:"h21",title:"小腸",cat:"内臓アプローチ"},{id:"h22",title:"恥骨上リリース 膀胱 子宮",cat:"骨盤内臓"},{id:"h23",title:"盲腸 虫垂 回盲弁",cat:"骨盤内臓"},{id:"h24",title:"卵巣",cat:"骨盤内臓"},{id:"h25",title:"S状結腸 直腸",cat:"骨盤内臓"},{id:"h26",title:"卵巣（仕上げ）",cat:"骨盤内臓"},{id:"h27",title:"大腸揺らし",cat:"仕上げ"},{id:"h28",title:"邪気抜き",cat:"仕上げ"},{id:"h29",title:"ポンプ",cat:"仕上げ",note:"リンパの流れを促し働き。呼吸数回"},{id:"h30",title:"後頭下筋",cat:"頭部"},{id:"h31",title:"胸鎖乳突筋",cat:"頭部"},{id:"h32",title:"側頭筋",cat:"頭部"},{id:"h33",title:"百会",cat:"頭部",note:"百会に指を添える 数呼吸分"},{id:"h34",title:"手を清める",cat:"終了",note:"一言だけお声かけし退出。手を振ってからクレイで手を清め流水で流す"}];
+const EVALS=[{id:"e1",label:"触診の精度",cat:"腹診"},{id:"e2",label:"鼓音チェックの手技",cat:"腹診"},{id:"e3",label:"澪診（五臓の把握）",cat:"腹診"},{id:"e4",label:"もつれ/しこりの識別",cat:"腹診"},{id:"e5",label:"腹直筋リリース",cat:"筋肉"},{id:"e6",label:"腹斜筋リリース",cat:"筋肉"},{id:"e7",label:"腹横筋リリース",cat:"筋肉"},{id:"e8",label:"横隔膜アプローチ",cat:"横隔膜・内臓"},{id:"e9",label:"肝胆アプローチ",cat:"横隔膜・内臓"},{id:"e10",label:"脾アプローチ",cat:"横隔膜・内臓"},{id:"e11",label:"心アプローチ",cat:"横隔膜・内臓"},{id:"e12",label:"癒着リリース",cat:"横隔膜・内臓"},{id:"e13",label:"小腸アプローチ",cat:"横隔膜・内臓"},{id:"e14",label:"大腸揺らし・邪気抜き",cat:"仕上げ・全体"},{id:"e15",label:"ポンプ・頭部仕上げ",cat:"仕上げ・全体"},{id:"e16",label:"手の温度・圧の調整",cat:"仕上げ・全体"},{id:"e17",label:"流れ・タイミング",cat:"仕上げ・全体"},{id:"e18",label:"施術者としての在り方・呼吸",cat:"仕上げ・全体"}];
+const SL=["","要復習","基礎OK","良好","優秀","模範"];
+async function apiAuth(email){const res=await fetch(GAS_URL+"?action=auth&email="+encodeURIComponent(email));return await res.json();}
+async function apiSaveReport(data){const res=await fetch(GAS_URL+"?action=save_report",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(data)});return await res.json();}
+async function apiGetReports(email){const url=email?GAS_URL+"?action=get_reports&email="+encodeURIComponent(email):GAS_URL+"?action=get_all_reports";const res=await fetch(url);return await res.json();}
+function render(){const app=document.getElementById("app");switch(state.view){case"login":app.innerHTML=renderLogin();break;case"home":app.innerHTML=renderHeader()+renderHome();break;case"about":app.innerHTML=renderHeader()+renderAbout();break;case"theory":app.innerHTML=renderHeader()+renderTheory();break;case"practice":app.innerHTML=renderHeader()+renderPractice();break;case"report":app.innerHTML=renderHeader()+renderReport();break;case"reports":app.innerHTML=renderHeader()+renderReports();break;}}
+function renderLogin(){return`<div class="login-wrap"><div class="login-box"><div style="font-size:48px;margin-bottom:8px">✿</div><h1>澪花 腹部コース</h1><p class="sub">インストラクター指導システム</p><input class="login-input" id="loginEmail" type="email" placeholder="メールアドレスを入力" value="" onkeydown="if(event.key==='Enter')doLogin()"><button class="login-btn" onclick="doLogin()">ログイン</button>${state.loginLoading?'<p class="login-loading">認証中...</p>':''}${state.loginError?`<p class="login-error">${state.loginError}</p>`:''}</div></div>`;}
+async function doLogin(){const email=document.getElementById("loginEmail").value.trim();if(!email){setState({loginError:"メールアドレスを入力してください"});return;}setState({loginLoading:true,loginError:""});try{const res=await apiAuth(email);if(res.success){setState({user:{email:res.email,name:res.name},view:"home",loginLoading:false,loginError:""});}else{setState({loginLoading:false,loginError:res.error||"認証失敗"});}}catch(e){setState({loginLoading:false,loginError:"通信エラー: "+e.message});}}
+function renderHeader(){const tabs=[{id:"home",l:"ホーム",i:"⌂"},{id:"about",l:"コース説明",i:"✿"},{id:"theory",l:"理論",i:"📖"},{id:"practice",l:"実技",i:"🤲"},{id:"report",l:"報告書",i:"📝"},{id:"reports",l:"履歴",i:"📋"}];return`<div class="header"><div class="header-top"><div class="header-brand"><span style="font-size:20px">✿</span> 澪花 腹部コース</div><div class="header-user"><span>${state.user?.name||""}</span><button onclick="setState({view:'login',user:null})">ログアウト</button></div></div><div class="tab-bar">${tabs.map(t=>`<button class="${state.view===t.id?'active':''}" onclick="nav('${t.id}')"><span>${t.i}</span>${t.l}</button>`).join("")}</div></div>`;}
+function nav(v){if(v==="reports"&&!state.reportsLoaded){loadReports();}setState({view:v,theoryMod:null,theoryTopic:null,practiceList:true});}
+function renderHome(){const cards=[{id:"about",icon:"✿",t:"コース説明",d:"生徒への説明内容・指導範囲",c:"var(--accent)",bg:"var(--accent-light)"},{id:"theory",icon:"📖",t:"理論教材",d:"自律神経・筋肉・内臓・腹診",c:"var(--blue)",bg:"var(--blue-light)"},{id:"practice",icon:"🤲",t:"実技プロトコル",d:"全34ステップの施術手順",c:"var(--green)",bg:"var(--green-light)"},{id:"report",icon:"📝",t:"指導報告書",d:"生徒の実技評価を記録",c:"var(--purple)",bg:"var(--purple-light)"},{id:"reports",icon:"📋",t:"報告書履歴",d:"過去の指導記録を閲覧",c:"var(--gold)",bg:"var(--gold-light)"}];return`<div class="container"><div style="text-align:center;margin-bottom:28px"><p style="font-size:28px">✿</p><h2 style="font-size:20px;font-weight:600;margin:8px 0 4px">ようこそ、${state.user?.name}先生</h2><p style="color:var(--sub);font-size:14px">澪花腹部コース 指導システム</p></div><div class="home-grid">${cards.map(c=>`<button class="home-card" style="background:${c.bg};border:1px solid ${c.c}22" onclick="nav('${c.id}')"><span class="icon">${c.icon}</span><h3 style="color:${c.c}">${c.t}</h3><p>${c.d}</p></button>`).join("")}</div></div>`;}
+function renderAbout(){return`<div class="container"><h2 class="section-title">コース説明</h2><div class="card" style="text-align:center;margin-bottom:20px"><p style="font-size:32px;margin-bottom:4px">✿</p><h2 style="color:var(--accent);font-size:22px;font-weight:700;margin-bottom:4px">澪花 腹部コース</h2><p style="color:var(--sub);font-size:16px">〜 臓に触れる 〜</p></div><div class="about-section"><h3>🌸 澪花とは</h3>${ABOUT.philosophy.map(p=>`<div class="about-point philosophy">${p}</div>`).join("")}</div><div class="about-section"><h3>📘 腹部コースの目的</h3>${ABOUT.purpose.map(p=>`<div class="about-point purpose">${p}</div>`).join("")}</div><div class="about-section"><h3>💛 腹部の大切さ</h3>${ABOUT.importance.map(p=>`<div class="about-point importance">${p}</div>`).join("")}</div><div class="about-section"><h3>🚫 指導範囲の注意</h3>${ABOUT.boundaries.map(p=>`<div class="about-point boundary">⚠ ${p}</div>`).join("")}</div></div>`;}
+function renderTheory(){if(state.theoryTopic){let mod,topic;for(const m of THEORY){const t=m.topics.find(x=>x.id===state.theoryTopic);if(t){mod=m;topic=t;break;}}if(!topic)return"";return`<div class="container"><button style="background:none;border:none;color:var(--accent);font-size:14px;margin-bottom:12px;padding:0" onclick="setState({theoryTopic:null})">← 戻る</button><div class="card"><span style="font-size:13px;color:var(--accent);font-weight:600">${mod.title}</span><h2 style="font-size:20px;font-weight:700;margin:8px 0 20px;border-bottom:2px solid var(--accent);padding-bottom:12px">${topic.title}</h2>${topic.points.map((p,i)=>`<div class="point-row"><span class="point-num">${i+1}</span><span class="point-text">${p}</span></div>`).join("")}</div></div>`;}if(state.theoryMod){const m=THEORY.find(x=>x.id===state.theoryMod);return`<div class="container"><button style="background:none;border:none;color:var(--accent);font-size:14px;margin-bottom:12px;padding:0" onclick="setState({theoryMod:null})">← 一覧</button><div class="card"><h2 style="display:flex;align-items:center;gap:10px;font-size:20px;font-weight:700;margin-bottom:16px"><span style="font-size:28px">${m.icon}</span>${m.title}</h2>${m.topics.map(t=>`<button style="display:flex;justify-content:space-between;align-items:center;padding:16px;background:var(--bg);border:1px solid var(--border);border-radius:12px;width:100%;text-align:left;margin-bottom:8px" onclick="setState({theoryTopic:'${t.id}'})"><div><span style="font-size:15px;font-weight:600">${t.title}</span><span style="color:var(--sub);font-size:12px;margin-left:8px">${t.points.length}項目</span></div><span style="color:var(--accent);font-size:18px">›</span></button>`).join("")}</div></div>`;}return`<div class="container"><h2 class="section-title">理論教材</h2>${THEORY.map((m,i)=>`<button class="mod-item" onclick="setState({theoryMod:'${m.id}'})"><div class="mod-icon">${m.icon}</div><div style="flex:1"><div style="display:flex;align-items:center;gap:8px"><span class="mod-num">${i+1}</span><span class="mod-title">${m.title}</span></div><p style="color:var(--sub);font-size:12px;margin:4px 0 0">${m.topics.length}トピック</p></div><span style="color:var(--accent);font-size:20px">›</span></button>`).join("")}</div>`;}
+function renderPractice(){if(!state.practiceList){const s=STEPS[state.practiceCur];const st=state.stepStatus[s.id]||"";const cm=state.stepComments[s.id]||"";return`<div class="container"><button style="background:none;border:none;color:var(--accent);font-size:14px;padding:0;margin-bottom:8px" onclick="setState({practiceList:true})">← 一覧</button><div class="card" style="text-align:center;padding:28px 20px"><div class="step-dots">${STEPS.map((_,i)=>{const sid=STEPS[i].id;const ss=state.stepStatus[sid]||"";const col=i===state.practiceCur?"var(--accent)":ss==="done"?"var(--green)":ss==="recheck"?"var(--orange)":"var(--border)";return`<div class="step-dot" style="background:${col}"></div>`;}).join("")}</div><span class="step-badge">${s.cat}</span><h2 style="font-size:22px;font-weight:700;margin:8px 0 4px">Step ${state.practiceCur+1} / ${STEPS.length}</h2><h3 style="color:var(--accent);font-size:20px;font-weight:700;margin-bottom:16px">${s.title}</h3>${s.note?`<div style="background:var(--gold-light);border-radius:12px;padding:12px 16px;margin-bottom:16px;text-align:left"><p style="color:var(--gold);font-size:13px;font-weight:600;margin-bottom:4px">📌 ポイント</p><p style="font-size:14px;line-height:1.6">${s.note}</p></div>`:''}<div class="step-actions"><button class="btn-done" style="background:${st==='done'?'var(--green)':'var(--border)'};color:${st==='done'?'#fff':'var(--text)'}" onclick="setStepStatus('${s.id}','done')">✓ 完了</button><button class="btn-recheck" style="background:${st==='recheck'?'var(--orange)':'var(--border)'};color:${st==='recheck'?'#fff':'var(--text)'}" onclick="setStepStatus('${s.id}','recheck')">↻ 再チェック</button></div>${st==='recheck'?`<div class="step-comment-area"><p style="font-size:13px;color:var(--orange);font-weight:600;margin-bottom:4px;text-align:left">⚠ 何が出来ていないか：</p><textarea placeholder="出来ていない点、次回の注意点を入力" onchange="setStepComment('${s.id}',this.value)">${cm}</textarea></div>`:''}${st==='done'&&cm?`<div style="background:var(--green-light);border-radius:10px;padding:10px 14px;margin-top:8px;text-align:left"><p style="font-size:12px;color:var(--green);font-weight:600">メモ：</p><p style="font-size:13px">${cm}</p></div>`:''}<div class="step-nav"><button style="border:1px solid var(--border);background:var(--bg);color:${state.practiceCur===0?'var(--border)':'var(--text)'}" onclick="if(${state.practiceCur}>0)setState({practiceCur:${state.practiceCur-1}})" ${state.practiceCur===0?'disabled':''}>← 前へ</button><button style="border:none;background:${state.practiceCur===STEPS.length-1?'var(--border)':'var(--accent)'};color:#fff;font-weight:600" onclick="if(${state.practiceCur}<${STEPS.length-1})setState({practiceCur:${state.practiceCur+1}})" ${state.practiceCur===STEPS.length-1?'disabled':''}>次へ →</button></div></div></div>`;}const cats={};STEPS.forEach((s,i)=>{if(!cats[s.cat])cats[s.cat]=[];cats[s.cat].push({...s,i});});return`<div class="container"><h2 class="section-title">実技プロトコル</h2><p style="color:var(--sub);font-size:13px;text-align:center;margin-bottom:16px">全${STEPS.length}ステップ</p>${Object.entries(cats).map(([cat,items])=>`<div style="margin-bottom:14px"><h3 class="step-cat">${cat}</h3>${items.map(x=>{const st=state.stepStatus[x.id]||"";const cls=st==="done"?"done":st==="recheck"?"recheck":"default";return`<button class="step-item" onclick="setState({practiceCur:${x.i},practiceList:false})"><span class="step-num ${cls}">${st==="done"?"✓":st==="recheck"?"↻":x.i+1}</span><span style="flex:1;font-size:15px;font-weight:500">${x.title}</span>${state.stepComments[x.id]?'<span style="color:var(--orange);font-size:12px">📝</span>':''}<span style="color:var(--sub);font-size:16px">›</span></button>`;}).join("")}</div>`).join("")}</div>`;}
+function setStepStatus(id,val){const s={...state.stepStatus};s[id]=s[id]===val?"":val;setState({stepStatus:s});}
+function setStepComment(id,val){const c={...state.stepComments};c[id]=val;state.stepComments=c;}
+function renderReport(){const evalCats={};EVALS.forEach(e=>{if(!evalCats[e.cat])evalCats[e.cat]=[];evalCats[e.cat].push(e);});return`<div class="container" style="padding-bottom:40px"><h2 class="section-title">指導報告書</h2><div class="card"><div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px"><div><label style="font-size:12px;color:var(--sub);font-weight:600">生徒名 *</label><input style="width:100%;padding:10px 12px;border-radius:10px;border:1px solid var(--border);font-size:15px;background:var(--bg);margin-top:4px" value="${state.reportStudent}" onchange="state.reportStudent=this.value"></div><div><label style="font-size:12px;color:var(--sub);font-weight:600">日付</label><input type="date" style="width:100%;padding:10px 12px;border-radius:10px;border:1px solid var(--border);font-size:15px;background:var(--bg);margin-top:4px" value="${state.reportDate}" onchange="state.reportDate=this.value"></div></div><p style="font-size:12px;color:var(--sub)">指導者：${state.user?.name} (${state.user?.email})</p></div>${Object.entries(evalCats).map(([cat,items])=>`<div class="card"><h3 style="color:var(--accent);font-size:14px;font-weight:700;margin-bottom:10px">${cat}</h3>${items.map(item=>`<div class="eval-score-row"><p class="eval-label">${item.label}</p><div class="eval-btns">${[1,2,3,4,5].map(v=>{const sel=state.reportScores[item.id]===v;const cls=sel?(v<=2?"selected-low":v<=3?"selected-mid":"selected-high"):"unselected";return`<button class="eval-btn ${cls}" onclick="setReportScore('${item.id}',${v})">${v} ${SL[v]}</button>`;}).join("")}</div></div>`).join("")}</div>`).join("")}<div class="card"><h3 style="color:var(--accent);font-size:14px;font-weight:700;margin-bottom:8px">実技ステップメモ（再チェック分）</h3>${Object.entries(state.stepComments).filter(([_,v])=>v).length>0?Object.entries(state.stepComments).filter(([_,v])=>v).map(([id,cm])=>{const s=STEPS.find(x=>x.id===id);const st=state.stepStatus[id]||"";return`<div style="padding:8px 12px;background:${st==='recheck'?'var(--orange-light)':'var(--green-light)'};border-radius:8px;margin-bottom:6px"><span style="font-size:13px;font-weight:600;color:${st==='recheck'?'var(--orange)':'var(--green)'}">${st==='recheck'?'↻':'✓'} ${s?s.title:id}</span><p style="font-size:13px;margin-top:2px">${cm}</p></div>`;}).join(""):'<p style="font-size:13px;color:var(--sub)">実技タブで記録したステップメモがここに表示されます</p>'}</div><div class="card"><h3 style="color:var(--accent);font-size:14px;font-weight:700;margin-bottom:8px">コメント・申し送り</h3><textarea style="width:100%;padding:12px;border-radius:10px;border:1px solid var(--border);font-size:14px;background:var(--bg);resize:vertical;line-height:1.7;min-height:80px" placeholder="生徒への指導メモ、次回の課題など" onchange="state.reportComment=this.value">${state.reportComment}</textarea></div><button style="width:100%;padding:16px;border-radius:14px;background:var(--accent);color:#fff;border:none;font-size:16px;font-weight:700" onclick="saveReport()" ${state.saving?'disabled':''}>${state.saving?'保存中...':'報告書を保存（スプレッドシートへ送信）'}</button></div>`;}
+function setReportScore(id,v){const s={...state.reportScores};s[id]=s[id]===v?undefined:v;setState({reportScores:s});}
+async function saveReport(){if(!state.reportStudent.trim()){alert("生徒名を入力してください");return;}setState({saving:true});try{const data={date:state.reportDate,instructor_email:state.user.email,instructor_name:state.user.name,student_name:state.reportStudent.trim(),scores:state.reportScores,step_notes:state.stepComments,comment:state.reportComment,};const res=await apiSaveReport(data);if(res.success){alert("報告書をスプレッドシートに保存しました");setState({saving:false,reportScores:{},reportStudent:"",reportComment:"",stepStatus:{},stepComments:{},view:"reports",reportsLoaded:false});loadReports();}else{alert("保存エラー: "+(res.error||"不明"));setState({saving:false});}}catch(e){alert("通信エラー: "+e.message);setState({saving:false});}}
+async function loadReports(){try{const res=await apiGetReports(null);if(res.success){setState({reports:res.reports,reportsLoaded:true});}  }catch(e){console.error(e);setState({reportsLoaded:true});}}
+function renderReports(){if(!state.reportsLoaded)return`<div class="container"><p style="text-align:center;color:var(--sub);padding:40px">読み込み中...</p></div>`;if(state.selectedReport){const r=state.selectedReport;const scores=r.scores||{};const stepNotes=r.step_notes||{};const vals=Object.values(scores).filter(v=>typeof v==='number');const avg=vals.length>0?(vals.reduce((a,b)=>a+b,0)/vals.length).toFixed(1):"—";return`<div class="container"><button style="background:none;border:none;color:var(--accent);font-size:14px;padding:0;margin-bottom:12px" onclick="setState({selectedReport:null})">← 一覧</button><div class="card"><div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px"><div><h2 style="font-size:20px;font-weight:700">${r.student_name}</h2><p style="color:var(--sub);font-size:13px;margin-top:4px">${r.date} ─ 指導者: ${r.instructor_name}</p></div><div style="background:var(--accent-light);border-radius:12px;padding:8px 16px;text-align:center"><span style="font-size:20px;font-weight:700;color:var(--accent)">${avg}</span><span style="font-size:11px;color:var(--sub);display:block">平均</span></div></div>${EVALS.map(item=>{const v=scores[item.id];if(!v)return'';const col=v<=2?"var(--red)":v<=3?"var(--gold)":"var(--green)";return`<div class="report-score-row"><span style="font-size:13px">${item.label}</span><span style="color:${col};font-weight:700;font-size:13px">${v} ${SL[v]}</span></div>`;}).join("")}${Object.entries(stepNotes).filter(([_,v])=>v).length>0?`<h3 style="color:var(--orange);font-size:14px;font-weight:700;margin-top:16px;margin-bottom:8px">実技ステップメモ</h3>${Object.entries(stepNotes).filter(([_,v])=>v).map(([id,cm])=>{const s=STEPS.find(x=>x.id===id);return`<div style="padding:8px 12px;background:var(--orange-light);border-radius:8px;margin-bottom:6px"><span style="font-size:13px;font-weight:600;color:var(--orange)">${s?s.title:id}</span><p style="font-size:13px;margin-top:2px">${cm}</p></div>`;}).join("")}`:''}${r.comment?`<div style="margin-top:16px;background:var(--bg);border-radius:12px;padding:14px"><p style="color:var(--accent);font-size:13px;font-weight:600;margin-bottom:4px">コメント</p><p style="font-size:14px;line-height:1.7;white-space:pre-wrap">${r.comment}</p></div>`:''}</div></div>`;}return`<div class="container"><h2 class="section-title">指導報告書 履歴</h2>${state.reports.length===0?`<div style="text-align:center;padding:40px;color:var(--sub)"><p style="font-size:32px;margin-bottom:8px">📋</p><p>まだ報告書がありません</p></div>`:`<div style="display:flex;flex-direction:column;gap:8px">${state.reports.map(r=>{const scores=r.scores||{};const vals=Object.values(scores).filter(v=>typeof v==='number');const avg=vals.length>0?(vals.reduce((a,b)=>a+b,0)/vals.length).toFixed(1):"—";return`<button style="display:flex;align-items:center;gap:14px;padding:16px;background:var(--card);border:1px solid var(--border);border-radius:14px;text-align:left;width:100%" onclick='selectReport(JSON.parse("${JSON.stringify(r).replace(/"/g,"&quot;")}"))' ><div style="width:44px;height:44px;border-radius:22px;background:var(--accent-light);display:flex;align-items:center;justify-content:center;flex-shrink:0"><span style="font-size:16px;font-weight:700;color:var(--accent)">${avg}</span></div><div style="flex:1"><span style="font-size:15px;font-weight:700">${r.student_name}</span><div style="display:flex;gap:8px;margin-top:2px"><span style="color:var(--sub);font-size:12px">${r.date}</span><span style="color:var(--sub);font-size:12px">by ${r.instructor_name}</span></div></div><span style="color:var(--accent);font-size:18px">›</span></button>`;}).join("")}</div>`}</div>`;}
+function selectReport(r){setState({selectedReport:r});}
+render();
+</script>
 </body>
 </html>
