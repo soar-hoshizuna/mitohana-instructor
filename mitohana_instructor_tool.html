@@ -1,156 +1,354 @@
-/* ═══════════════════════════════════════════════════════════════
-   澪花 腹部コース インストラクター指導システム GAS
-   ── Googleスプレッドシート連携 ──
-   
-   シート構成:
-   ① instructors  : email, name, approved (許可済みインストラクター)
-   ② reports      : id, date, instructor_email, instructor_name, student_name, scores_json, step_notes_json, comment, created_at
-   ═══════════════════════════════════════════════════════════════ */
-
-const SS_ID = "YOUR_SPREADSHEET_ID_HERE"; //https://script.google.com/macros/s/AKfycbwfrIqLQxH-v1AOUTSvFopA8tr6HU6yN0EaAl43b8KRSdRGejt0svowKbmXVgyvjxwD/exec
-
-function doGet(e) {
-  return handleRequest(e);
-}
-
-function doPost(e) {
-  return handleRequest(e);
-}
-
-function handleRequest(e) {
-  const params = e.parameter || {};
-  const action = params.action || "";
-  
-  let result;
-  try {
-    switch(action) {
-      case "auth":
-        result = authInstructor(params.email);
-        break;
-      case "save_report":
-        const postData = JSON.parse(e.postData.contents);
-        result = saveReport(postData);
-        break;
-      case "get_reports":
-        result = getReports(params.email);
-        break;
-      case "get_all_reports":
-        result = getAllReports();
-        break;
-      default:
-        result = { success: false, error: "Unknown action" };
-    }
-  } catch(err) {
-    result = { success: false, error: err.toString() };
-  }
-  
-  return ContentService.createTextOutput(JSON.stringify(result))
-    .setMimeType(ContentService.MimeType.JSON);
-}
-
-// ── 認証 ──
-function authInstructor(email) {
-  if (!email) return { success: false, error: "メールアドレスを入力してください" };
-  
-  const ss = SpreadsheetApp.openById(SS_ID);
-  let sheet = ss.getSheetByName("instructors");
-  
-  // シートなければ作成
-  if (!sheet) {
-    sheet = ss.insertSheet("instructors");
-    sheet.appendRow(["email", "name", "approved"]);
-    // Makiを初期登録
-    sheet.appendRow(["maki@soar-wellness.com", "Maki", "TRUE"]);
-  }
-  
-  const data = sheet.getDataRange().getValues();
-  const emailLower = email.toLowerCase().trim();
-  
-  for (let i = 1; i < data.length; i++) {
-    if (data[i][0].toString().toLowerCase().trim() === emailLower) {
-      if (data[i][2].toString().toUpperCase() === "TRUE") {
-        return { 
-          success: true, 
-          name: data[i][1].toString(),
-          email: data[i][0].toString()
-        };
-      } else {
-        return { success: false, error: "このアカウントは現在無効です" };
-      }
-    }
-  }
-  
-  return { success: false, error: "登録されていないメールアドレスです" };
-}
-
-// ── 報告書保存 ──
-function saveReport(data) {
-  const ss = SpreadsheetApp.openById(SS_ID);
-  let sheet = ss.getSheetByName("reports");
-  
-  if (!sheet) {
-    sheet = ss.insertSheet("reports");
-    sheet.appendRow([
-      "id", "date", "instructor_email", "instructor_name", 
-      "student_name", "scores_json", "step_notes_json", "comment", "created_at"
-    ]);
-    // ヘッダー行を太字に
-    sheet.getRange(1, 1, 1, 9).setFontWeight("bold");
-  }
-  
-  const id = new Date().getTime().toString();
-  const now = new Date().toISOString();
-  
-  sheet.appendRow([
-    id,
-    data.date || "",
-    data.instructor_email || "",
-    data.instructor_name || "",
-    data.student_name || "",
-    JSON.stringify(data.scores || {}),
-    JSON.stringify(data.step_notes || {}),
-    data.comment || "",
-    now
-  ]);
-  
-  return { success: true, id: id };
-}
-
-// ── 報告書取得（指導者別）──
-function getReports(email) {
-  const ss = SpreadsheetApp.openById(SS_ID);
-  const sheet = ss.getSheetByName("reports");
-  
-  if (!sheet) return { success: true, reports: [] };
-  
-  const data = sheet.getDataRange().getValues();
-  const reports = [];
-  
-  for (let i = 1; i < data.length; i++) {
-    if (!email || data[i][2].toString().toLowerCase() === email.toLowerCase()) {
-      reports.push({
-        id: data[i][0].toString(),
-        date: data[i][1].toString(),
-        instructor_email: data[i][2].toString(),
-        instructor_name: data[i][3].toString(),
-        student_name: data[i][4].toString(),
-        scores: tryParse(data[i][5]),
-        step_notes: tryParse(data[i][6]),
-        comment: data[i][7].toString(),
-        created_at: data[i][8].toString()
-      });
-    }
-  }
-  
-  reports.reverse(); // 新しい順
-  return { success: true, reports: reports };
-}
-
-// ── 全報告書取得（Maki用）──
-function getAllReports() {
-  return getReports(null);
-}
-
-function tryParse(s) {
-  try { return JSON.parse(s); } catch { return {}; }
-}
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>澪花 腹部コース インストラクター指導システム</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            max-width: 500px;
+            width: 100%;
+            padding: 40px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .header h1 {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #333;
+        }
+        
+        input[type="email"],
+        input[type="text"],
+        input[type="password"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+            font-family: inherit;
+            transition: border-color 0.3s;
+        }
+        
+        input[type="email"]:focus,
+        input[type="text"]:focus,
+        input[type="password"]:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        
+        button {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+        
+        button:active {
+            transform: translateY(0);
+        }
+        
+        .message {
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            display: none;
+        }
+        
+        .message.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            display: block;
+        }
+        
+        .message.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+            display: block;
+        }
+        
+        .loading {
+            display: none;
+            text-align: center;
+            color: #666;
+        }
+        
+        .spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #667eea;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 10px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .tab-buttons {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+        
+        .tab-btn {
+            flex: 1;
+            padding: 10px;
+            background: #f0f0f0;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        
+        .tab-btn.active {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .info-box {
+            background: #e7f3ff;
+            border-left: 4px solid #2196F3;
+            padding: 12px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+            font-size: 13px;
+            color: #1565c0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>澪花</h1>
+            <p>腹部コース インストラクター指導システム</p>
+        </div>
+        
+        <div id="message" class="message"></div>
+        
+        <div class="tab-buttons">
+            <button class="tab-btn active" onclick="switchTab('login')">ログイン</button>
+            <button class="tab-btn" onclick="switchTab('register')">登録</button>
+        </div>
+        
+        <!-- ログインタブ -->
+        <div id="login" class="tab-content active">
+            <div class="info-box">
+                📧 メールアドレスでログインしてください
+            </div>
+            <form onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label for="login-email">メールアドレス</label>
+                    <input type="email" id="login-email" required placeholder="example@email.com">
+                </div>
+                <button type="submit">ログイン</button>
+            </form>
+        </div>
+        
+        <!-- 登録タブ -->
+        <div id="register" class="tab-content">
+            <div class="info-box">
+                ✏️ 新しくアカウントを作成してください
+            </div>
+            <form onsubmit="handleRegister(event)">
+                <div class="form-group">
+                    <label for="register-email">メールアドレス</label>
+                    <input type="email" id="register-email" required placeholder="example@email.com">
+                </div>
+                <div class="form-group">
+                    <label for="register-name">氏名</label>
+                    <input type="text" id="register-name" required placeholder="山田 太郎">
+                </div>
+                <div class="form-group">
+                    <label for="register-password">パスワード</label>
+                    <input type="password" id="register-password" required placeholder="••••••••">
+                </div>
+                <button type="submit">アカウント作成</button>
+            </form>
+        </div>
+        
+        <div class="loading" id="loading">
+            <div class="spinner"></div>
+            <p>処理中...</p>
+        </div>
+    </div>
+    
+    <script>
+        const GAS_URL = "https://script.google.com/macros/s/AKfycbwfrIqLQxH-v1AOUTSvFopA8tr6HU6yN0EaAl43b8KRSdRGejt0svowKbmXVgyvjxwD/exec";
+        
+        function switchTab(tab) {
+            // すべてのタブを非表示
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+            
+            // 選択されたタブを表示
+            document.getElementById(tab).classList.add('active');
+            event.target.classList.add('active');
+        }
+        
+        function showMessage(message, type) {
+            const messageEl = document.getElementById('message');
+            messageEl.textContent = message;
+            messageEl.className = `message ${type}`;
+            setTimeout(() => {
+                messageEl.className = 'message';
+            }, 5000);
+        }
+        
+        function showLoading(show) {
+            document.getElementById('loading').style.display = show ? 'block' : 'none';
+        }
+        
+        async function handleLogin(event) {
+            event.preventDefault();
+            const email = document.getElementById('login-email').value;
+            
+            showLoading(true);
+            
+            try {
+                const response = await fetch(GAS_URL, {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        action: 'auth',
+                        email: email
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    showMessage('✓ ログインしました。リダイレクト中...', 'success');
+                    // 2秒後にシステムに遷移
+                    setTimeout(() => {
+                        window.location.href = '?logged_in=' + email;
+                    }, 2000);
+                } else {
+                    showMessage('✗ ' + (data.error || 'ログインに失敗しました'), 'error');
+                }
+            } catch (error) {
+                showMessage('✗ エラーが発生しました: ' + error.message, 'error');
+            }
+            
+            showLoading(false);
+        }
+        
+        async function handleRegister(event) {
+            event.preventDefault();
+            const email = document.getElementById('register-email').value;
+            const name = document.getElementById('register-name').value;
+            
+            showLoading(true);
+            
+            try {
+                const response = await fetch(GAS_URL, {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        action: 'register',
+                        email: email,
+                        name: name
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    showMessage('✓ 登録が完了しました。ログインしてください', 'success');
+                    document.getElementById('register-email').value = email;
+                    document.getElementById('register-name').value = '';
+                    // ログインタブに切り替え
+                    document.getElementById('login').classList.add('active');
+                    document.getElementById('register').classList.remove('active');
+                    document.querySelectorAll('.tab-btn')[0].classList.add('active');
+                    document.querySelectorAll('.tab-btn')[1].classList.remove('active');
+                } else {
+                    showMessage('✗ ' + (data.error || '登録に失敗しました'), 'error');
+                }
+            } catch (error) {
+                showMessage('✗ エラーが発生しました: ' + error.message, 'error');
+            }
+            
+            showLoading(false);
+        }
+        
+        // ページ読み込み時の処理
+        window.addEventListener('load', () => {
+            const params = new URLSearchParams(window.location.search);
+            if (params.has('logged_in')) {
+                const email = params.get('logged_in');
+                showMessage('✓ ' + email + ' でログイン中です', 'success');
+            }
+        });
+    </script>
+</body>
+</html>
