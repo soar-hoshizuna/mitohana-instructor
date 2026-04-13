@@ -1,0 +1,156 @@
+/* ═══════════════════════════════════════════════════════════════
+   澪花 腹部コース インストラクター指導システム GAS
+   ── Googleスプレッドシート連携 ──
+   
+   シート構成:
+   ① instructors  : email, name, approved (許可済みインストラクター)
+   ② reports      : id, date, instructor_email, instructor_name, student_name, scores_json, step_notes_json, comment, created_at
+   ═══════════════════════════════════════════════════════════════ */
+
+const SS_ID = "YOUR_SPREADSHEET_ID_HERE"; //https://script.google.com/macros/s/AKfycbwfrIqLQxH-v1AOUTSvFopA8tr6HU6yN0EaAl43b8KRSdRGejt0svowKbmXVgyvjxwD/exec
+
+function doGet(e) {
+  return handleRequest(e);
+}
+
+function doPost(e) {
+  return handleRequest(e);
+}
+
+function handleRequest(e) {
+  const params = e.parameter || {};
+  const action = params.action || "";
+  
+  let result;
+  try {
+    switch(action) {
+      case "auth":
+        result = authInstructor(params.email);
+        break;
+      case "save_report":
+        const postData = JSON.parse(e.postData.contents);
+        result = saveReport(postData);
+        break;
+      case "get_reports":
+        result = getReports(params.email);
+        break;
+      case "get_all_reports":
+        result = getAllReports();
+        break;
+      default:
+        result = { success: false, error: "Unknown action" };
+    }
+  } catch(err) {
+    result = { success: false, error: err.toString() };
+  }
+  
+  return ContentService.createTextOutput(JSON.stringify(result))
+    .setMimeType(ContentService.MimeType.JSON);
+}
+
+// ── 認証 ──
+function authInstructor(email) {
+  if (!email) return { success: false, error: "メールアドレスを入力してください" };
+  
+  const ss = SpreadsheetApp.openById(SS_ID);
+  let sheet = ss.getSheetByName("instructors");
+  
+  // シートなければ作成
+  if (!sheet) {
+    sheet = ss.insertSheet("instructors");
+    sheet.appendRow(["email", "name", "approved"]);
+    // Makiを初期登録
+    sheet.appendRow(["maki@soar-wellness.com", "Maki", "TRUE"]);
+  }
+  
+  const data = sheet.getDataRange().getValues();
+  const emailLower = email.toLowerCase().trim();
+  
+  for (let i = 1; i < data.length; i++) {
+    if (data[i][0].toString().toLowerCase().trim() === emailLower) {
+      if (data[i][2].toString().toUpperCase() === "TRUE") {
+        return { 
+          success: true, 
+          name: data[i][1].toString(),
+          email: data[i][0].toString()
+        };
+      } else {
+        return { success: false, error: "このアカウントは現在無効です" };
+      }
+    }
+  }
+  
+  return { success: false, error: "登録されていないメールアドレスです" };
+}
+
+// ── 報告書保存 ──
+function saveReport(data) {
+  const ss = SpreadsheetApp.openById(SS_ID);
+  let sheet = ss.getSheetByName("reports");
+  
+  if (!sheet) {
+    sheet = ss.insertSheet("reports");
+    sheet.appendRow([
+      "id", "date", "instructor_email", "instructor_name", 
+      "student_name", "scores_json", "step_notes_json", "comment", "created_at"
+    ]);
+    // ヘッダー行を太字に
+    sheet.getRange(1, 1, 1, 9).setFontWeight("bold");
+  }
+  
+  const id = new Date().getTime().toString();
+  const now = new Date().toISOString();
+  
+  sheet.appendRow([
+    id,
+    data.date || "",
+    data.instructor_email || "",
+    data.instructor_name || "",
+    data.student_name || "",
+    JSON.stringify(data.scores || {}),
+    JSON.stringify(data.step_notes || {}),
+    data.comment || "",
+    now
+  ]);
+  
+  return { success: true, id: id };
+}
+
+// ── 報告書取得（指導者別）──
+function getReports(email) {
+  const ss = SpreadsheetApp.openById(SS_ID);
+  const sheet = ss.getSheetByName("reports");
+  
+  if (!sheet) return { success: true, reports: [] };
+  
+  const data = sheet.getDataRange().getValues();
+  const reports = [];
+  
+  for (let i = 1; i < data.length; i++) {
+    if (!email || data[i][2].toString().toLowerCase() === email.toLowerCase()) {
+      reports.push({
+        id: data[i][0].toString(),
+        date: data[i][1].toString(),
+        instructor_email: data[i][2].toString(),
+        instructor_name: data[i][3].toString(),
+        student_name: data[i][4].toString(),
+        scores: tryParse(data[i][5]),
+        step_notes: tryParse(data[i][6]),
+        comment: data[i][7].toString(),
+        created_at: data[i][8].toString()
+      });
+    }
+  }
+  
+  reports.reverse(); // 新しい順
+  return { success: true, reports: reports };
+}
+
+// ── 全報告書取得（Maki用）──
+function getAllReports() {
+  return getReports(null);
+}
+
+function tryParse(s) {
+  try { return JSON.parse(s); } catch { return {}; }
+}
