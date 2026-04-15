@@ -419,7 +419,7 @@ function renderHome(){
   ];
   return '<div class="container">'+
     '<div style="text-align:center;margin-bottom:28px">'+
-    '<img src="'+LOGO_SRC+'" style="width:80px;height:80px;object-fit:contain;margin-bottom:8px">'+
+    '<img src="logo.jpg" style="width:80px;height:80px;object-fit:contain;margin-bottom:12px;">' +
     '<h2 style="font-size:20px;font-weight:600;margin:8px 0 4px">ようこそ、'+(state.user?state.user.name:"")+'先生</h2>'+
     '<p style="color:var(--sub);font-size:14px">澪花腹部コース 指導システム</p></div>'+
     '<div class="home-grid">'+
@@ -432,7 +432,7 @@ function renderHome(){
 function renderAbout(){
   return '<div class="container"><h2 class="section-title">コース説明</h2>'+
     '<div class="card" style="text-align:center;margin-bottom:20px">'+
-    '<img src="'+LOGO_SRC+'" style="width:80px;height:80px;object-fit:contain;margin-bottom:8px">'+
+    '<img src="logo.jpg" style="width:80px;height:80px;object-fit:contain;margin-bottom:8px;">' +
     '<h2 style="color:var(--accent);font-size:22px;font-weight:700;margin-bottom:4px">澪花 腹部コース</h2>'+
     '<p style="color:var(--sub);font-size:16px">〜 臓に触れる 〜</p></div>'+
     '<div class="about-section"><h3>🌸 澪花とは</h3>'+ABOUT.philosophy.map(function(p){return '<div class="about-point philosophy">'+p+'</div>';}).join("")+'</div>'+
