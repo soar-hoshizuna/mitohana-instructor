@@ -395,7 +395,7 @@ function renderHeader(){
     {id:"reports", l:"履歴",      i:"📋"}
   ];
   return '<div class="header"><div class="header-top">'+
-    '<div class="header-brand"><img class="header-logo" src="'+LOGO_SRC+'" alt="澪花"> 澪花 腹部コース</div>'+
+   '<div class="header-brand"><img class="header-logo" src="logo.jpg" alt="澪花"> 澪花 腹部コース</div>'+
     '<div class="header-user"><span>'+(state.user?state.user.name:"")+'</span><button onclick="setState({view:\'login\',user:null})">ログアウト</button></div>'+
     '</div><div class="tab-bar">'+
     tabs.map(function(t){
