@@ -125,7 +125,7 @@ input,textarea,select { font-family:inherit; }
 <body>
 <script>
 const GAS_URL = "https://script.google.com/macros/s/AKfycbw0EhGlPQwoqbz8Zw93pMItgn50TPvuyQR9ead8YDolUBgY6UoL4MdRZoL6QgSQzRQ5/exec";
-const LOGO_SRC = "https://soar-hoshizuna.github.io/mitohana-instructor/logo.jpg";
+const LOGO_SRC = "https://soar-hoshizuna.github.io/mitohana-tool/logo.jpg";
 </script>
 <div id="app"></div>
 <script>
@@ -399,7 +399,7 @@ function renderHeader(){
     '<div class="header-user"><span>'+(state.user?state.user.name:"")+'</span><button onclick="setState({view:\'login\',user:null})">ログアウト</button></div>'+
     '</div><div class="tab-bar">'+
     tabs.map(function(t){
-      return '<button class="'+(state.view===t.id?"active":"")+'" onclick="nav(\'"+t.id+"\')"><span>'+t.i+'</span>'+t.l+'</button>';
+      return '<button class="'+(state.view===t.id?"active":"")+'" onclick="nav(\x27'+t.id+'\x27)"><span>'+t.i+'</span>'+t.l+'</button>';
     }).join("")+
     '</div></div>';
 }
@@ -424,7 +424,7 @@ function renderHome(){
     '<p style="color:var(--sub);font-size:14px">澪花腹部コース 指導システム</p></div>'+
     '<div class="home-grid">'+
     cards.map(function(c){
-      return '<button class="home-card" style="background:'+c.bg+';border:1px solid '+c.c+'22" onclick="nav(\'"+c.id+"\')"><span class="icon">'+c.icon+'</span><h3 style="color:'+c.c+'">'+c.t+'</h3><p>'+c.d+'</p></button>';
+      return '<button class="home-card" style="background:'+c.bg+';border:1px solid '+c.c+'22" onclick="nav(\x27'+c.id+'\x27)"><span class="icon">'+c.icon+'</span><h3 style="color:'+c.c+'">'+c.t+'</h3><p>'+c.d+'</p></button>';
     }).join("")+
     '</div></div>';
 }
