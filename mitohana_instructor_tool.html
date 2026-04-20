@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
@@ -94,35 +93,34 @@ input,textarea,select { font-family:inherit; }
 .verdict-label { font-size:28px; font-weight:700; margin-bottom:4px; }
 .verdict-label.pass { color:#5a8a5e; }
 .verdict-label.fail { color:#c45050; }
-.verdict-sub { font-size:13px; color:var(–sub); margin-top:4px; }
+.verdict-sub { font-size:13px; color:var(--sub); margin-top:4px; }
 .verdict-stats { display:flex; gap:10px; justify-content:center; margin-top:14px; flex-wrap:wrap; }
 .verdict-stat { background:rgba(255,255,255,0.7); border-radius:12px; padding:10px 16px; text-align:center; min-width:80px; }
 .verdict-stat .num { font-size:22px; font-weight:700; }
-.verdict-stat .lbl { font-size:11px; color:var(–sub); margin-top:2px; }
+.verdict-stat .lbl { font-size:11px; color:var(--sub); margin-top:2px; }
 .genre-verdict-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:14px; }
 .genre-verdict-item { border-radius:12px; padding:12px 14px; }
-.genre-verdict-item.ok { background:var(–green-light); border:1px solid #5a8a5e44; }
-.genre-verdict-item.ng { background:var(–red-light); border:1px solid #c4505044; }
+.genre-verdict-item.ok { background:var(--green-light); border:1px solid #5a8a5e44; }
+.genre-verdict-item.ng { background:var(--red-light); border:1px solid #c4505044; }
 .genre-verdict-item .g-name { font-size:12px; font-weight:700; margin-bottom:4px; }
-.genre-verdict-item.ok .g-name { color:var(–green); }
-.genre-verdict-item.ng .g-name { color:var(–red); }
+.genre-verdict-item.ok .g-name { color:var(--green); }
+.genre-verdict-item.ng .g-name { color:var(--red); }
 .genre-verdict-item .g-score { font-size:20px; font-weight:700; }
-.genre-verdict-item.ok .g-score { color:var(–green); }
-.genre-verdict-item.ng .g-score { color:var(–red); }
+.genre-verdict-item.ok .g-score { color:var(--green); }
+.genre-verdict-item.ng .g-score { color:var(--red); }
 .genre-verdict-item .g-status { font-size:11px; margin-top:2px; }
-.hokou-list { background:var(–orange-light); border-radius:14px; padding:16px; margin-bottom:14px; }
-.hokou-list h3 { color:var(–orange); font-size:14px; font-weight:700; margin-bottom:10px; display:flex; align-items:center; gap:6px; }
-.hokou-item { display:flex; align-items:center; gap:10px; padding:8px 10px; background:#fff; border-radius:10px; margin-bottom:6px; border-left:3px solid var(–orange); }
-.hokou-item .h-score { font-weight:700; color:var(–red); font-size:13px; min-width:28px; }
+.hokou-list { background:var(--orange-light); border-radius:14px; padding:16px; margin-bottom:14px; }
+.hokou-list h3 { color:var(--orange); font-size:14px; font-weight:700; margin-bottom:10px; display:flex; align-items:center; gap:6px; }
+.hokou-item { display:flex; align-items:center; gap:10px; padding:8px 10px; background:#fff; border-radius:10px; margin-bottom:6px; border-left:3px solid var(--orange); }
+.hokou-item .h-score { font-weight:700; color:var(--red); font-size:13px; min-width:28px; }
 .hokou-item .h-label { font-size:13px; flex:1; }
-.hokou-item .h-cat { font-size:11px; color:var(–sub); background:rgba(0,0,0,0.06); border-radius:6px; padding:2px 6px; }
-.verdict-pending { text-align:center; padding:20px; color:var(–sub); font-size:14px; }
-.cat-bar { height:6px; border-radius:3px; background:var(–border); margin-top:4px; overflow:hidden; }
+.hokou-item .h-cat { font-size:11px; color:var(--sub); background:rgba(0,0,0,0.06); border-radius:6px; padding:2px 6px; }
+.verdict-pending { text-align:center; padding:20px; color:var(--sub); font-size:14px; }
+.cat-bar { height:6px; border-radius:3px; background:var(--border); margin-top:4px; overflow:hidden; }
 .cat-bar-fill { height:100%; border-radius:3px; }
 
 @media(max-width:480px) { .home-grid { grid-template-columns:1fr; } .step-nav button { padding:12px 20px; font-size:14px; } .genre-verdict-grid { grid-template-columns:1fr; } }
 </style>
-
 </head>
 <body>
 <script>
@@ -142,137 +140,137 @@ let state = {
 function setState(patch){Object.assign(state,patch);render();}
 
 const ABOUT={
-philosophy:[“澪（みお）── 水の流れる道・生命の通り道・氣の通り道”,“花（はな）── 人それぞれが天より授かりし魂の彩。世に一つ 己が花を咲かすもの”,“澪花は己が身の内にある澪を整え、滞りを解きほぐし、天より授かりし氣を巡らせ、その人ならではの花を咲かせるための手あて”],
-purpose:[“腹部コースは「臓に気づく」ための入口です”,“筋肉・内臓の生理学をベースに、五臓の基礎と腹部反射ゾーンを学びます”,“身体と心を五臓で感じ、痛くないアプローチで内臓の手あてをすることが目的です”],
-importance:[“自律神経の中枢”,“生命を維持する臓器が集まる場所”,“怒り・悲しみ・不安 ── 言葉にならない感情が積み重なる場所”],
-boundaries:[“腹部コースでは「臓に触れる」ところまでを学びます”,”「手を育む」ことは本講座（澪花メインコース）でのみ指導します ── 腹部コースでは教えないでください”,“エネルギーの使い方は腹部コースの範囲外です ── 指導しないでください”,“臓の触れ方・感じ方を丁寧に伝えることに集中してください”]
+  philosophy:["澪（みお）── 水の流れる道・生命の通り道・氣の通り道","花（はな）── 人それぞれが天より授かりし魂の彩。世に一つ 己が花を咲かすもの","澪花は己が身の内にある澪を整え、滞りを解きほぐし、天より授かりし氣を巡らせ、その人ならではの花を咲かせるための手あて"],
+  purpose:["腹部コースは「臓に気づく」ための入口です","筋肉・内臓の生理学をベースに、五臓の基礎と腹部反射ゾーンを学びます","身体と心を五臓で感じ、痛くないアプローチで内臓の手あてをすることが目的です"],
+  importance:["自律神経の中枢","生命を維持する臓器が集まる場所","怒り・悲しみ・不安 ── 言葉にならない感情が積み重なる場所"],
+  boundaries:["腹部コースでは「臓に触れる」ところまでを学びます","「手を育む」ことは本講座（澪花メインコース）でのみ指導します ── 腹部コースでは教えないでください","エネルギーの使い方は腹部コースの範囲外です ── 指導しないでください","臓の触れ方・感じ方を丁寧に伝えることに集中してください"]
 };
 
 const THEORY=[
-{id:“intro”,title:“腹部の大切さ”,icon:“🌸”,topics:[
-{id:“t1”,title:“腹部の大切さ”,points:[“自律神経の中枢”,“生命を維持する臓器が集まる”,“怒り・悲しみ・不安 — 言葉にならない感情が積み重なる場所”]},
-{id:“t2”,title:“澪花腹部の手あて 〜臓に触れる〜”,points:[“腹部コースは「臓に気づく」ための入口”,“筋肉・内臓の生理学をベースに、五臓の基礎と腹部反射ゾーンを学ぶ”]}
-]},
-{id:“autonomic”,title:“自律神経”,icon:“⚡”,topics:[
-{id:“a1”,title:“神経の分類と働き”,points:[“神経とは、脳と身体の各器官が互いに情報を伝え合う道”,“情報を伝える神経は大きく分けて2つ：中枢神経と末梢神経”,“末梢神経は体制神経と自律神経に分けられる”,“体制神経 ── 意志でコントロールでき知覚や運動をつかさどる（知覚神経・運動神経）”,“自律神経 ── 意志とは無関係に体の機能を調整する”]},
-{id:“a2”,title:“交感神経と副交感神経”,points:[“自律神経は正反対の作用をする交感神経と副交感神経がある”,”《交感神経》活動時、ストレスを受けた時 ── 心身を緊張・興奮状態に導く”,”《副交感神経》休息時、睡眠時 ── 心身をリラックスさせ、鎮静状態に導く”,“自律神経は1日を通してどちらかが必ず優位になっている”,“血管：交感神経→収縮 / 副交感神経→拡張”,“血圧：交感神経→上昇 / 副交感神経→下降”,“心拍：交感神経→速い / 副交感神経→ゆっくり”,“筋肉：交感神経→緊張 / 副交感神経→弛緩”,“腸：交感神経→ぜん動抑制 / 副交感神経→ぜん動促進”,“発汗：交感神経→促進 / 副交感神経→抑制”]},
-{id:“a3”,title:“自律神経の分布”,points:[“自律神経の働きをする末梢神経の神経線維は脳神経、脊髄神経の中に含まれている”,“脳から出る12対の神経、脊髄から出る31対の神経がある”,“交感神経の神経節は脊椎の両側に並んでいて上下の神経節が神経線維で結ばれて交感神経幹を作っている”,“交感神経節は頸部で3対、胸部で10〜12対、腰部で4〜5対、仙骨部に4〜5対あり最下部は尾骨に1対ある”]},
-{id:“a4”,title:“自律神経の乱れと症状”,points:[“自律神経は両方がしっかり機能することが整った状態”,“それぞれが正しく機能しないと自律神経の乱れた状態になる”,“自律神経の乱れは様々な辛い症状を引き起こす”,”【頭】不眠・イライラする・頭痛・気分が落ち込む・集中力が低下する”,”【目・耳・口】眼精疲労・耳鳴り・めまい、立ちくらみ・口渇（歯周病や虫歯のリスク）”,”【首・胸】首や肩のこり・息苦しさ・動悸・血圧が上がる”,”【胃・腸】吐き気・食欲不振・便秘、下痢・お腹が張る、ガスがたまる”,”【子宮・膀胱】月経不順・頻尿”,”【腰・手足】腰痛・手足がしびれる・手足が冷える”,”【全身】疲れやすい・ほてり・微熱・多汗”]}
-]},
-{id:“braingut”,title:“脳腸相関”,icon:“🧠”,topics:[
-{id:“bg1”,title:“脳腸相関のしくみ”,points:[“脳と腸は神経で双方向に繋がっている（脳腸相関）”,”【遠心性神経（脳→腸）】ストレス→胃：消化管運動異常、内臓知覚過敏”,”【求心性神経（腸→脳）】腸の不調→脳：心理的異常（不安、緊張、抑うつなど）”,”【腸の症状】消化管運動異常（便通異常）、内臓知覚過敏（下腹部痛、ガス）”,“セロトニン（幸せホルモン）：体内の90〜95%は腸管で作られる”]}
-]},
-{id:“muscle”,title:“筋肉の基礎”,icon:“💪”,topics:[
-{id:“m1”,title:“筋肉の分類”,points:[“骨格筋（横紋筋）── 随意筋”,“心筋（横紋筋）── 不随意筋”,“内臓筋（平滑筋）── 不随意筋”,“不随意筋は自律神経によってコントロールされる”]},
-{id:“m2”,title:“筋肉の作用”,points:[“張力・運動・姿勢保持・熱の産生”]},
-{id:“m3”,title:“筋肉の構造”,points:[“骨格筋は筋繊維が多数集まったもの”,“筋内膜→筋周膜→筋外膜の三層構造”,“筋原線維→筋形質→筋鞘→単一筋線維→筋線維束→筋腹→腱”]},
-{id:“m4”,title:“筋紡錘”,points:[“筋肉の中に埋め込まれている感覚受容器”,“筋肉の伸長速度・量を感知”,“急に引き伸ばされると伸張反射を起こす”]}
-]},
-{id:“abmuscle”,title:“腹部の筋肉”,icon:“🏋️”,topics:[
-{id:“ab1”,title:“横隔膜”,points:[“呼吸の主動筋”,“胸腔と腹腔の間のドーム状の筋肉”,“3つの裂孔：大動脈裂孔・食道裂孔・下大静脈裂孔”]},
-{id:“ab2”,title:“外腹斜筋”,points:[“浅層の筋肉”,“体幹の側屈・回旋・屈曲”,“起始：第5〜12肋骨の外面 / 停止：鼠経靭帯・腸骨稜・腹直筋鞘”]},
-{id:“ab3”,title:“腹直筋”,points:[“表層にある縦方向の筋肉（4〜5段）”,“体幹の屈曲”,“起始：恥骨結合 / 停止：第5〜7肋軟骨”]},
-{id:“ab4”,title:“内腹斜筋”,points:[“外腹斜筋の深層”,“外腹斜筋と直角の繊維”,“体幹の回旋・側屈・屈曲”]},
-{id:“ab5”,title:“腹横筋”,points:[“側腹の一番深層”,“息を吐くときの主力筋”]}
-]},
-{id:“peritoneum”,title:“腹膜と膜構造”,icon:“🫧”,topics:[
-{id:“p1”,title:“壁側腹膜・大網・臓側腹膜”,points:[“壁側腹膜 ── 腹壁の内側を覆う膜”,“大網 ── 胃から垂れ下がるエプロン状の膜”,“臓側腹膜 ── 内臓の表面を覆う膜”]}
-]},
-{id:“organs1”,title:“内臓①（心肺・肝胆膵）”,icon:“🫀”,topics:[
-{id:“o1”,title:“心臓”,points:[“血液を全身に巡らせる”]},
-{id:“o2”,title:“肺”,points:[“酸素を取り込む・二酸化炭素を排出”]},
-{id:“o3”,title:“肝臓”,points:[“血液貯蔵・解毒・胆汁生成・代謝”]},
-{id:“o4”,title:“胆嚢”,points:[“胆汁貯蔵（凝縮）・脂肪消化を助ける”]},
-{id:“o5”,title:“膵臓”,points:[“消化酵素分泌（外分泌）・インスリン分泌（内分泌）”]},
-{id:“o6”,title:“十二指腸”,points:[“胆汁と膵液が合流する消化の要”]}
-]},
-{id:“organs2”,title:“内臓②（胃・脾・腸）”,icon:“🫁”,topics:[
-{id:“o7”,title:“胃”,points:[“消化・吸収”,“小網で肝臓と連結、大網が胃から垂れ下がる”]},
-{id:“o8”,title:“脾臓”,points:[“消化・吸収・水分代謝”,“古くなった赤血球を壊す・血小板の貯蔵・免疫”]},
-{id:“o9”,title:“小腸”,points:[“消化・栄養吸収”,“空腸（上部）と回腸（下部）”]},
-{id:“o10”,title:“大腸”,points:[“水分吸収・排便”,“免疫司令塔”,“横行結腸・上行結腸・下行結腸・S状結腸・盲腸・直腸”]}
-]},
-{id:“organs3”,title:“内臓③（腎・膀胱・生殖器）”,icon:“🌿”,topics:[
-{id:“o11”,title:“腎臓”,points:[“血液から老廃物を除去”,“水分量・電解質・塩分バランスを保つ”,“ホルモン分泌”]},
-{id:“o12”,title:“副腎”,points:[“血圧・血糖・電解質の調整”,“性ホルモンの補助”]},
-{id:“o13”,title:“膀胱”,points:[“尿を溜める・排尿コントロール”]},
-{id:“o14”,title:“子宮・卵管・卵巣”,points:[“子宮：受精卵を受け取り胎児を育てる”,“卵管：受精の場所”,“卵巣：女性ホルモンを分泌”]}
-]},
-{id:“diagnosis”,title:“腹診・評価”,icon:“🔍”,topics:[
-{id:“d1”,title:“鼓音チェック”,points:[“両手を上下に重ね、下の手で腹に沿い、上の手で叩く”,“空気がある音がする場所に気の停滞”,“溜まりやすい場所：結腸の脾曲・回盲部・結腸”,“施術前後で変化をチェック”]},
-{id:“d2”,title:“五臓”,points:[”【肝】疏泄を司る / 【心】血脈と神を司る”,”【脾】運化を司る / 【肺】気を司る”,”【腎】精を蔵し成長・発育・生殖を主る”,“気は肺と脾が作る”]},
-{id:“d3”,title:“澪診（腹部の五臓配置）”,points:[“上部：みぞおち付近（中央：心、右：胆、左：脾）”,“中央上：胃”,“左右肋骨下：肝”,“中央：脾（大きく中央）”,“下腹部中央：腎”,“左右下部（鼠径部付近）：お血（瘀血）”]},
-{id:“d4”,title:“もつれとしこり”,points:[”【もつれ】絡まり・ねじれ・組織間の滑走不全 / 感触：ごわごわ・流れが悪い”,”【しこり】固まり・気血水の滞りが強く圧縮された状態 / 感触：硬い・動かない”]},
-{id:“d5”,title:“腹診 臍センター（風門）”,points:[“臍（へそ）は臍の緒を通じて母と繋がっていた場所”,“腹部の邪気を臍に集め解放するため門を開く（風門）”,“腹部全体のエネルギーの通り道を整える起点”]}
-]}
+  {id:"intro",title:"腹部の大切さ",icon:"🌸",topics:[
+    {id:"t1",title:"腹部の大切さ",points:["自律神経の中枢","生命を維持する臓器が集まる","怒り・悲しみ・不安 — 言葉にならない感情が積み重なる場所"]},
+    {id:"t2",title:"澪花腹部の手あて 〜臓に触れる〜",points:["腹部コースは「臓に気づく」ための入口","筋肉・内臓の生理学をベースに、五臓の基礎と腹部反射ゾーンを学ぶ"]}
+  ]},
+  {id:"autonomic",title:"自律神経",icon:"⚡",topics:[
+    {id:"a1",title:"神経の分類と働き",points:["神経とは、脳と身体の各器官が互いに情報を伝え合う道","情報を伝える神経は大きく分けて2つ：中枢神経と末梢神経","末梢神経は体制神経と自律神経に分けられる","体制神経 ── 意志でコントロールでき知覚や運動をつかさどる（知覚神経・運動神経）","自律神経 ── 意志とは無関係に体の機能を調整する"]},
+    {id:"a2",title:"交感神経と副交感神経",points:["自律神経は正反対の作用をする交感神経と副交感神経がある","《交感神経》活動時、ストレスを受けた時 ── 心身を緊張・興奮状態に導く","《副交感神経》休息時、睡眠時 ── 心身をリラックスさせ、鎮静状態に導く","自律神経は1日を通してどちらかが必ず優位になっている","血管：交感神経→収縮 / 副交感神経→拡張","血圧：交感神経→上昇 / 副交感神経→下降","心拍：交感神経→速い / 副交感神経→ゆっくり","筋肉：交感神経→緊張 / 副交感神経→弛緩","腸：交感神経→ぜん動抑制 / 副交感神経→ぜん動促進","発汗：交感神経→促進 / 副交感神経→抑制"]},
+    {id:"a3",title:"自律神経の分布",points:["自律神経の働きをする末梢神経の神経線維は脳神経、脊髄神経の中に含まれている","脳から出る12対の神経、脊髄から出る31対の神経がある","交感神経の神経節は脊椎の両側に並んでいて上下の神経節が神経線維で結ばれて交感神経幹を作っている","交感神経節は頸部で3対、胸部で10〜12対、腰部で4〜5対、仙骨部に4〜5対あり最下部は尾骨に1対ある"]},
+    {id:"a4",title:"自律神経の乱れと症状",points:["自律神経は両方がしっかり機能することが整った状態","それぞれが正しく機能しないと自律神経の乱れた状態になる","自律神経の乱れは様々な辛い症状を引き起こす","【頭】不眠・イライラする・頭痛・気分が落ち込む・集中力が低下する","【目・耳・口】眼精疲労・耳鳴り・めまい、立ちくらみ・口渇（歯周病や虫歯のリスク）","【首・胸】首や肩のこり・息苦しさ・動悸・血圧が上がる","【胃・腸】吐き気・食欲不振・便秘、下痢・お腹が張る、ガスがたまる","【子宮・膀胱】月経不順・頻尿","【腰・手足】腰痛・手足がしびれる・手足が冷える","【全身】疲れやすい・ほてり・微熱・多汗"]}
+  ]},
+  {id:"braingut",title:"脳腸相関",icon:"🧠",topics:[
+    {id:"bg1",title:"脳腸相関のしくみ",points:["脳と腸は神経で双方向に繋がっている（脳腸相関）","【遠心性神経（脳→腸）】ストレス→胃：消化管運動異常、内臓知覚過敏","【求心性神経（腸→脳）】腸の不調→脳：心理的異常（不安、緊張、抑うつなど）","【腸の症状】消化管運動異常（便通異常）、内臓知覚過敏（下腹部痛、ガス）","セロトニン（幸せホルモン）：体内の90〜95%は腸管で作られる"]}
+  ]},
+  {id:"muscle",title:"筋肉の基礎",icon:"💪",topics:[
+    {id:"m1",title:"筋肉の分類",points:["骨格筋（横紋筋）── 随意筋","心筋（横紋筋）── 不随意筋","内臓筋（平滑筋）── 不随意筋","不随意筋は自律神経によってコントロールされる"]},
+    {id:"m2",title:"筋肉の作用",points:["張力・運動・姿勢保持・熱の産生"]},
+    {id:"m3",title:"筋肉の構造",points:["骨格筋は筋繊維が多数集まったもの","筋内膜→筋周膜→筋外膜の三層構造","筋原線維→筋形質→筋鞘→単一筋線維→筋線維束→筋腹→腱"]},
+    {id:"m4",title:"筋紡錘",points:["筋肉の中に埋め込まれている感覚受容器","筋肉の伸長速度・量を感知","急に引き伸ばされると伸張反射を起こす"]}
+  ]},
+  {id:"abmuscle",title:"腹部の筋肉",icon:"🏋️",topics:[
+    {id:"ab1",title:"横隔膜",points:["呼吸の主動筋","胸腔と腹腔の間のドーム状の筋肉","3つの裂孔：大動脈裂孔・食道裂孔・下大静脈裂孔"]},
+    {id:"ab2",title:"外腹斜筋",points:["浅層の筋肉","体幹の側屈・回旋・屈曲","起始：第5〜12肋骨の外面 / 停止：鼠経靭帯・腸骨稜・腹直筋鞘"]},
+    {id:"ab3",title:"腹直筋",points:["表層にある縦方向の筋肉（4〜5段）","体幹の屈曲","起始：恥骨結合 / 停止：第5〜7肋軟骨"]},
+    {id:"ab4",title:"内腹斜筋",points:["外腹斜筋の深層","外腹斜筋と直角の繊維","体幹の回旋・側屈・屈曲"]},
+    {id:"ab5",title:"腹横筋",points:["側腹の一番深層","息を吐くときの主力筋"]}
+  ]},
+  {id:"peritoneum",title:"腹膜と膜構造",icon:"🫧",topics:[
+    {id:"p1",title:"壁側腹膜・大網・臓側腹膜",points:["壁側腹膜 ── 腹壁の内側を覆う膜","大網 ── 胃から垂れ下がるエプロン状の膜","臓側腹膜 ── 内臓の表面を覆う膜"]}
+  ]},
+  {id:"organs1",title:"内臓①（心肺・肝胆膵）",icon:"🫀",topics:[
+    {id:"o1",title:"心臓",points:["血液を全身に巡らせる"]},
+    {id:"o2",title:"肺",points:["酸素を取り込む・二酸化炭素を排出"]},
+    {id:"o3",title:"肝臓",points:["血液貯蔵・解毒・胆汁生成・代謝"]},
+    {id:"o4",title:"胆嚢",points:["胆汁貯蔵（凝縮）・脂肪消化を助ける"]},
+    {id:"o5",title:"膵臓",points:["消化酵素分泌（外分泌）・インスリン分泌（内分泌）"]},
+    {id:"o6",title:"十二指腸",points:["胆汁と膵液が合流する消化の要"]}
+  ]},
+  {id:"organs2",title:"内臓②（胃・脾・腸）",icon:"🫁",topics:[
+    {id:"o7",title:"胃",points:["消化・吸収","小網で肝臓と連結、大網が胃から垂れ下がる"]},
+    {id:"o8",title:"脾臓",points:["消化・吸収・水分代謝","古くなった赤血球を壊す・血小板の貯蔵・免疫"]},
+    {id:"o9",title:"小腸",points:["消化・栄養吸収","空腸（上部）と回腸（下部）"]},
+    {id:"o10",title:"大腸",points:["水分吸収・排便","免疫司令塔","横行結腸・上行結腸・下行結腸・S状結腸・盲腸・直腸"]}
+  ]},
+  {id:"organs3",title:"内臓③（腎・膀胱・生殖器）",icon:"🌿",topics:[
+    {id:"o11",title:"腎臓",points:["血液から老廃物を除去","水分量・電解質・塩分バランスを保つ","ホルモン分泌"]},
+    {id:"o12",title:"副腎",points:["血圧・血糖・電解質の調整","性ホルモンの補助"]},
+    {id:"o13",title:"膀胱",points:["尿を溜める・排尿コントロール"]},
+    {id:"o14",title:"子宮・卵管・卵巣",points:["子宮：受精卵を受け取り胎児を育てる","卵管：受精の場所","卵巣：女性ホルモンを分泌"]}
+  ]},
+  {id:"diagnosis",title:"腹診・評価",icon:"🔍",topics:[
+    {id:"d1",title:"鼓音チェック",points:["両手を上下に重ね、下の手で腹に沿い、上の手で叩く","空気がある音がする場所に気の停滞","溜まりやすい場所：結腸の脾曲・回盲部・結腸","施術前後で変化をチェック"]},
+    {id:"d2",title:"五臓",points:["【肝】疏泄を司る / 【心】血脈と神を司る","【脾】運化を司る / 【肺】気を司る","【腎】精を蔵し成長・発育・生殖を主る","気は肺と脾が作る"]},
+    {id:"d3",title:"澪診（腹部の五臓配置）",points:["上部：みぞおち付近（中央：心、右：胆、左：脾）","中央上：胃","左右肋骨下：肝","中央：脾（大きく中央）","下腹部中央：腎","左右下部（鼠径部付近）：お血（瘀血）"]},
+    {id:"d4",title:"もつれとしこり",points:["【もつれ】絡まり・ねじれ・組織間の滑走不全 / 感触：ごわごわ・流れが悪い","【しこり】固まり・気血水の滞りが強く圧縮された状態 / 感触：硬い・動かない"]},
+    {id:"d5",title:"腹診 臍センター（風門）",points:["臍（へそ）は臍の緒を通じて母と繋がっていた場所","腹部の邪気を臍に集め解放するため門を開く（風門）","腹部全体のエネルギーの通り道を整える起点"]}
+  ]}
 ];
 
 const STEPS=[
-{id:“h01”,title:“タオル上から手をあてる”,cat:“準備”},
-{id:“h02”,title:“腹部の確認”,cat:“準備”},
-{id:“h03”,title:“触診”,cat:“準備”},
-{id:“h04”,title:“鼓音チェック”,cat:“準備”},
-{id:“h05”,title:“手を温めオイル塗布”,cat:“準備”},
-{id:“h06”,title:“風門を開く”,cat:“腹診”},
-{id:“h07”,title:“腹直筋側部 リリース”,cat:“筋肉リリース”},
-{id:“h08”,title:“腹直筋上から腹斜筋リリース”,cat:“筋肉リリース”},
-{id:“h09”,title:“腹直筋 ライン”,cat:“筋肉リリース”},
-{id:“h10”,title:“外腹斜筋”,cat:“筋肉リリース”},
-{id:“h11”,title:“内腹斜筋”,cat:“筋肉リリース”},
-{id:“h12”,title:“腹横筋”,cat:“筋肉リリース”},
-{id:“h13”,title:“左横隔膜”,cat:“横隔膜”},
-{id:“h14”,title:“横隔膜 左〜右”,cat:“横隔膜”},
-{id:“h15”,title:“肝 胆”,cat:“内臓アプローチ”},
-{id:“h16”,title:“脾”,cat:“内臓アプローチ”},
-{id:“h17”,title:“心”,cat:“内臓アプローチ”},
-{id:“h18”,title:“胃〜肝の癒着”,cat:“癒着リリース”},
-{id:“h19”,title:“胃 腸の癒着”,cat:“癒着リリース”},
-{id:“h20”,title:“大腸 脾 胃の癒着”,cat:“癒着リリース”},
-{id:“h21”,title:“小腸”,cat:“内臓アプローチ”},
-{id:“h22”,title:“恥骨上リリース 膀胱 子宮”,cat:“骨盤内臓”},
-{id:“h23”,title:“盲腸 虫垂 回盲弁”,cat:“骨盤内臓”},
-{id:“h24”,title:“卵巣”,cat:“骨盤内臓”},
-{id:“h25”,title:“S状結腸 直腸”,cat:“骨盤内臓”},
-{id:“h26”,title:“卵巣（仕上げ）”,cat:“骨盤内臓”},
-{id:“h27”,title:“大腸揺らし”,cat:“仕上げ”},
-{id:“h28”,title:“邪気抜き”,cat:“仕上げ”},
-{id:“h29”,title:“ポンプ”,cat:“仕上げ”,note:“リンパの流れを促し働き。呼吸数回”},
-{id:“h30”,title:“後頭下筋”,cat:“頭部”},
-{id:“h31”,title:“胸鎖乳突筋”,cat:“頭部”},
-{id:“h32”,title:“側頭筋”,cat:“頭部”},
-{id:“h33”,title:“百会”,cat:“頭部”,note:“百会に指を添える 数呼吸分”},
-{id:“h34”,title:“手を清める”,cat:“終了”,note:“一言だけお声かけし退出。手を振ってからクレイで手を清め流水で流す”}
+  {id:"h01",title:"タオル上から手をあてる",cat:"準備"},
+  {id:"h02",title:"腹部の確認",cat:"準備"},
+  {id:"h03",title:"触診",cat:"準備"},
+  {id:"h04",title:"鼓音チェック",cat:"準備"},
+  {id:"h05",title:"手を温めオイル塗布",cat:"準備"},
+  {id:"h06",title:"風門を開く",cat:"腹診"},
+  {id:"h07",title:"腹直筋側部 リリース",cat:"筋肉リリース"},
+  {id:"h08",title:"腹直筋上から腹斜筋リリース",cat:"筋肉リリース"},
+  {id:"h09",title:"腹直筋 ライン",cat:"筋肉リリース"},
+  {id:"h10",title:"外腹斜筋",cat:"筋肉リリース"},
+  {id:"h11",title:"内腹斜筋",cat:"筋肉リリース"},
+  {id:"h12",title:"腹横筋",cat:"筋肉リリース"},
+  {id:"h13",title:"左横隔膜",cat:"横隔膜"},
+  {id:"h14",title:"横隔膜 左〜右",cat:"横隔膜"},
+  {id:"h15",title:"肝 胆",cat:"内臓アプローチ"},
+  {id:"h16",title:"脾",cat:"内臓アプローチ"},
+  {id:"h17",title:"心",cat:"内臓アプローチ"},
+  {id:"h18",title:"胃〜肝の癒着",cat:"癒着リリース"},
+  {id:"h19",title:"胃 腸の癒着",cat:"癒着リリース"},
+  {id:"h20",title:"大腸 脾 胃の癒着",cat:"癒着リリース"},
+  {id:"h21",title:"小腸",cat:"内臓アプローチ"},
+  {id:"h22",title:"恥骨上リリース 膀胱 子宮",cat:"骨盤内臓"},
+  {id:"h23",title:"盲腸 虫垂 回盲弁",cat:"骨盤内臓"},
+  {id:"h24",title:"卵巣",cat:"骨盤内臓"},
+  {id:"h25",title:"S状結腸 直腸",cat:"骨盤内臓"},
+  {id:"h26",title:"卵巣（仕上げ）",cat:"骨盤内臓"},
+  {id:"h27",title:"大腸揺らし",cat:"仕上げ"},
+  {id:"h28",title:"邪気抜き",cat:"仕上げ"},
+  {id:"h29",title:"ポンプ",cat:"仕上げ",note:"リンパの流れを促し働き。呼吸数回"},
+  {id:"h30",title:"後頭下筋",cat:"頭部"},
+  {id:"h31",title:"胸鎖乳突筋",cat:"頭部"},
+  {id:"h32",title:"側頭筋",cat:"頭部"},
+  {id:"h33",title:"百会",cat:"頭部",note:"百会に指を添える 数呼吸分"},
+  {id:"h34",title:"手を清める",cat:"終了",note:"一言だけお声かけし退出。手を振ってからクレイで手を清め流水で流す"}
 ];
 
 /* ===== 評価項目（ジャンル付き） ===== */
 const EVALS=[
-{id:“e1”, label:“触診の精度”,             cat:“腹診”},
-{id:“e2”, label:“鼓音チェックの手技”,     cat:“腹診”},
-{id:“e3”, label:“澪診（五臓の把握）”,     cat:“腹診”},
-{id:“e5”, label:“腹直筋リリース”,         cat:“筋肉”},
-{id:“e6”, label:“腹斜筋リリース”,         cat:“筋肉”},
-{id:“e7”, label:“腹横筋リリース”,         cat:“筋肉”},
-{id:“e8”, label:“横隔膜アプローチ”,       cat:“横隔膜・内臓”},
-{id:“e9”, label:“肝胆アプローチ”,         cat:“横隔膜・内臓”},
-{id:“e10”,label:“脾アプローチ”,           cat:“横隔膜・内臓”},
-{id:“e11”,label:“心アプローチ”,           cat:“横隔膜・内臓”},
-{id:“e12”,label:“癒着リリース”,           cat:“横隔膜・内臓”},
-{id:“e13”,label:“小腸アプローチ”,         cat:“横隔膜・内臓”},
-{id:“e14”,label:“膀胱・卵巣アプローチ”,   cat:“横隔膜・内臓”},
-{id:“e15”,label:“S状結腸アプローチ”,      cat:“横隔膜・内臓”},
-{id:“e16”,label:“大腸揺らし・邪気抜き”,   cat:“仕上げ・全体”},
-{id:“e17”,label:“ポンプ・頭部仕上げ”,     cat:“仕上げ・全体”},
-{id:“e18”,label:“手の温度・圧の調整”,     cat:“仕上げ・全体”},
-{id:“e19”,label:“流れ・タイミング”,       cat:“仕上げ・全体”},
-{id:“e20”,label:“素直さ”,                 cat:“施術者としての在り方”},
-{id:“e21”,label:“マナー”,                 cat:“施術者としての在り方”},
-{id:“e22”,label:“寄り添う心”,             cat:“施術者としての在り方”},
-{id:“e23”,label:“向上心”,                 cat:“施術者としての在り方”},
-{id:“e24”,label:“丁寧さ”,                 cat:“施術者としての在り方”},
-{id:“e25”,label:“思いやり”,               cat:“施術者としての在り方”}
+  {id:"e1", label:"触診の精度",             cat:"腹診"},
+  {id:"e2", label:"鼓音チェックの手技",     cat:"腹診"},
+  {id:"e3", label:"澪診（五臓の把握）",     cat:"腹診"},
+  {id:"e5", label:"腹直筋リリース",         cat:"筋肉"},
+  {id:"e6", label:"腹斜筋リリース",         cat:"筋肉"},
+  {id:"e7", label:"腹横筋リリース",         cat:"筋肉"},
+  {id:"e8", label:"横隔膜アプローチ",       cat:"横隔膜・内臓"},
+  {id:"e9", label:"肝胆アプローチ",         cat:"横隔膜・内臓"},
+  {id:"e10",label:"脾アプローチ",           cat:"横隔膜・内臓"},
+  {id:"e11",label:"心アプローチ",           cat:"横隔膜・内臓"},
+  {id:"e12",label:"癒着リリース",           cat:"横隔膜・内臓"},
+  {id:"e13",label:"小腸アプローチ",         cat:"横隔膜・内臓"},
+  {id:"e14",label:"膀胱・卵巣アプローチ",   cat:"横隔膜・内臓"},
+  {id:"e15",label:"S状結腸アプローチ",      cat:"横隔膜・内臓"},
+  {id:"e16",label:"大腸揺らし・邪気抜き",   cat:"仕上げ・全体"},
+  {id:"e17",label:"ポンプ・頭部仕上げ",     cat:"仕上げ・全体"},
+  {id:"e18",label:"手の温度・圧の調整",     cat:"仕上げ・全体"},
+  {id:"e19",label:"流れ・タイミング",       cat:"仕上げ・全体"},
+  {id:"e20",label:"素直さ",                 cat:"施術者としての在り方"},
+  {id:"e21",label:"マナー",                 cat:"施術者としての在り方"},
+  {id:"e22",label:"寄り添う心",             cat:"施術者としての在り方"},
+  {id:"e23",label:"向上心",                 cat:"施術者としての在り方"},
+  {id:"e24",label:"丁寧さ",                 cat:"施術者としての在り方"},
+  {id:"e25",label:"思いやり",               cat:"施術者としての在り方"}
 ];
 
-const SL=[””,“要復習”,“基礎OK”,“良好”,“優秀”,“模範”];
+const SL=["","要復習","基礎OK","良好","優秀","模範"];
 
 /* ===== 合格判定ロジック ===== */
 const PASS_AVG = 4.0;   // 総合平均 4以上
@@ -280,481 +278,481 @@ const PASS_MIN = 3;     // 個別最低点 4以上（3以下で不合格）
 const PASS_CAT_MIN = 3; // ジャンル平均 3以下で不合格
 
 function calcVerdict(scores) {
-var entries = Object.entries(scores).filter(function(e){ return typeof e[1]===“number”; });
-if (entries.length === 0) return null;
+  var entries = Object.entries(scores).filter(function(e){ return typeof e[1]==="number"; });
+  if (entries.length === 0) return null;
 
-var vals = entries.map(function(e){ return e[1]; });
-var avg = vals.reduce(function(a,b){return a+b;},0) / vals.length;
-var minVal = Math.min.apply(null, vals);
-var minItem = entries.find(function(e){ return e[1]===minVal; });
-var minLabel = “”;
-if (minItem) {
-var ev = EVALS.find(function(x){ return x.id===minItem[0]; });
-minLabel = ev ? ev.label : minItem[0];
-}
+  var vals = entries.map(function(e){ return e[1]; });
+  var avg = vals.reduce(function(a,b){return a+b;},0) / vals.length;
+  var minVal = Math.min.apply(null, vals);
+  var minItem = entries.find(function(e){ return e[1]===minVal; });
+  var minLabel = "";
+  if (minItem) {
+    var ev = EVALS.find(function(x){ return x.id===minItem[0]; });
+    minLabel = ev ? ev.label : minItem[0];
+  }
 
-// ジャンル別集計
-var catMap = {};
-entries.forEach(function(e){
-var ev = EVALS.find(function(x){ return x.id===e[0]; });
-var cat = ev ? ev.cat : “その他”;
-if (!catMap[cat]) catMap[cat] = [];
-catMap[cat].push(e[1]);
-});
-var catStats = {};
-Object.keys(catMap).forEach(function(cat){
-var cv = catMap[cat];
-var cavg = cv.reduce(function(a,b){return a+b;},0)/cv.length;
-var cmin = Math.min.apply(null, cv);
-catStats[cat] = {avg:cavg, min:cmin, count:cv.length};
-});
+  // ジャンル別集計
+  var catMap = {};
+  entries.forEach(function(e){
+    var ev = EVALS.find(function(x){ return x.id===e[0]; });
+    var cat = ev ? ev.cat : "その他";
+    if (!catMap[cat]) catMap[cat] = [];
+    catMap[cat].push(e[1]);
+  });
+  var catStats = {};
+  Object.keys(catMap).forEach(function(cat){
+    var cv = catMap[cat];
+    var cavg = cv.reduce(function(a,b){return a+b;},0)/cv.length;
+    var cmin = Math.min.apply(null, cv);
+    catStats[cat] = {avg:cavg, min:cmin, count:cv.length};
+  });
 
-// 補講対象：点数が3以下の項目
-var hokou = entries.filter(function(e){ return e[1] <= 3; }).map(function(e){
-var ev = EVALS.find(function(x){ return x.id===e[0]; });
-return {id:e[0], label:ev?ev.label:e[0], cat:ev?ev.cat:””, score:e[1]};
-}).sort(function(a,b){return a.score-b.score;});
+  // 補講対象：点数が3以下の項目
+  var hokou = entries.filter(function(e){ return e[1] <= 3; }).map(function(e){
+    var ev = EVALS.find(function(x){ return x.id===e[0]; });
+    return {id:e[0], label:ev?ev.label:e[0], cat:ev?ev.cat:"", score:e[1]};
+  }).sort(function(a,b){return a.score-b.score;});
 
-// 合格条件
-var avgPass = avg >= PASS_AVG;
-var minPass = minVal > PASS_MIN;
-var catPass = Object.values(catStats).every(function(c){ return c.avg > PASS_CAT_MIN; });
-var pass = avgPass && minPass && catPass;
+  // 合格条件
+  var avgPass = avg >= PASS_AVG;
+  var minPass = minVal > PASS_MIN;
+  var catPass = Object.values(catStats).every(function(c){ return c.avg > PASS_CAT_MIN; });
+  var pass = avgPass && minPass && catPass;
 
-// 不合格理由
-var reasons = [];
-if (!avgPass) reasons.push(“総合平均 “+avg.toFixed(1)+” < 4.0”);
-if (!minPass) reasons.push(“最低点 “+minVal+” ≤ 3（項目：”+minLabel+”）”);
-Object.keys(catStats).forEach(function(cat){
-if (catStats[cat].avg <= PASS_CAT_MIN) {
-reasons.push(”「”+cat+”」ジャンル平均 “+catStats[cat].avg.toFixed(1)+” ≤ 3.0”);
-}
-});
+  // 不合格理由
+  var reasons = [];
+  if (!avgPass) reasons.push("総合平均 "+avg.toFixed(1)+" < 4.0");
+  if (!minPass) reasons.push("最低点 "+minVal+" ≤ 3（項目："+minLabel+"）");
+  Object.keys(catStats).forEach(function(cat){
+    if (catStats[cat].avg <= PASS_CAT_MIN) {
+      reasons.push("「"+cat+"」ジャンル平均 "+catStats[cat].avg.toFixed(1)+" ≤ 3.0");
+    }
+  });
 
-return {pass:pass, avg:avg, minVal:minVal, minLabel:minLabel, catStats:catStats, hokou:hokou, reasons:reasons, total:vals.length};
+  return {pass:pass, avg:avg, minVal:minVal, minLabel:minLabel, catStats:catStats, hokou:hokou, reasons:reasons, total:vals.length};
 }
 
 async function apiAuth(email){
-var res=await fetch(GAS_URL+”?action=auth&email=”+encodeURIComponent(email));
-return await res.json();
+  var res=await fetch(GAS_URL+"?action=auth&email="+encodeURIComponent(email));
+  return await res.json();
 }
 async function apiSaveReport(data){
-var p=new URLSearchParams();
-p.set(“action”,“save_report”);
-p.set(“date”,data.date||””);
-p.set(“instructor_email”,data.instructor_email||””);
-p.set(“instructor_name”,data.instructor_name||””);
-p.set(“student_name”,data.student_name||””);
-p.set(“scores_json”,JSON.stringify(data.scores||{}));
-p.set(“step_notes_json”,JSON.stringify(data.step_notes||{}));
-p.set(“comment”,data.comment||””);
-var res=await fetch(GAS_URL+”?”+p.toString());
-return await res.json();
+  var p=new URLSearchParams();
+  p.set("action","save_report");
+  p.set("date",data.date||"");
+  p.set("instructor_email",data.instructor_email||"");
+  p.set("instructor_name",data.instructor_name||"");
+  p.set("student_name",data.student_name||"");
+  p.set("scores_json",JSON.stringify(data.scores||{}));
+  p.set("step_notes_json",JSON.stringify(data.step_notes||{}));
+  p.set("comment",data.comment||"");
+  var res=await fetch(GAS_URL+"?"+p.toString());
+  return await res.json();
 }
 async function apiGetReports(email){
-var url=email?GAS_URL+”?action=get_reports&email=”+encodeURIComponent(email):GAS_URL+”?action=get_all_reports”;
-var res=await fetch(url);
-return await res.json();
+  var url=email?GAS_URL+"?action=get_reports&email="+encodeURIComponent(email):GAS_URL+"?action=get_all_reports";
+  var res=await fetch(url);
+  return await res.json();
 }
 
 function render(){
-var app=document.getElementById(“app”);
-switch(state.view){
-case”login”:   app.innerHTML=renderLogin(); break;
-case”home”:    app.innerHTML=renderHeader()+renderHome(); break;
-case”about”:   app.innerHTML=renderHeader()+renderAbout(); break;
-case”theory”:  app.innerHTML=renderHeader()+renderTheory(); break;
-case”practice”:app.innerHTML=renderHeader()+renderPractice(); break;
-case”report”:  app.innerHTML=renderHeader()+renderReport(); break;
-case”reports”: app.innerHTML=renderHeader()+renderReports(); break;
-}
+  var app=document.getElementById("app");
+  switch(state.view){
+    case"login":   app.innerHTML=renderLogin(); break;
+    case"home":    app.innerHTML=renderHeader()+renderHome(); break;
+    case"about":   app.innerHTML=renderHeader()+renderAbout(); break;
+    case"theory":  app.innerHTML=renderHeader()+renderTheory(); break;
+    case"practice":app.innerHTML=renderHeader()+renderPractice(); break;
+    case"report":  app.innerHTML=renderHeader()+renderReport(); break;
+    case"reports": app.innerHTML=renderHeader()+renderReports(); break;
+  }
 }
 
 function renderLogin(){
-return ‘<div class="login-wrap"><div class="login-box">’+
-‘<img class="login-logo" src="'+LOGO_SRC+'" alt="澪花ロゴ">’+
-‘<h1>澪花 腹部コース</h1>’+
-‘<p class="sub">インストラクター指導システム</p>’+
-‘<input class="login-input" id="loginEmail" type="email" placeholder="メールアドレスを入力" onkeydown="if(event.key===\'Enter\')doLogin()">’+
-‘<button class="login-btn" onclick="doLogin()">ログイン</button>’+
-(state.loginLoading?’<p class="login-loading">認証中…</p>’:’’)+
-(state.loginError?’<p class="login-error">’+state.loginError+’</p>’:’’)+
-‘</div></div>’;
+  return '<div class="login-wrap"><div class="login-box">'+
+    '<img class="login-logo" src="'+LOGO_SRC+'" alt="澪花ロゴ">'+
+    '<h1>澪花 腹部コース</h1>'+
+    '<p class="sub">インストラクター指導システム</p>'+
+    '<input class="login-input" id="loginEmail" type="email" placeholder="メールアドレスを入力" onkeydown="if(event.key===\'Enter\')doLogin()">'+
+    '<button class="login-btn" onclick="doLogin()">ログイン</button>'+
+    (state.loginLoading?'<p class="login-loading">認証中...</p>':'')+
+    (state.loginError?'<p class="login-error">'+state.loginError+'</p>':'')+
+    '</div></div>';
 }
 
 async function doLogin(){
-var email=document.getElementById(“loginEmail”).value.trim();
-if(!email){setState({loginError:“メールアドレスを入力してください”});return;}
-setState({loginLoading:true,loginError:””});
-try{
-var res=await apiAuth(email);
-if(res.success){setState({user:{email:res.email,name:res.name},view:“home”,loginLoading:false,loginError:””});}
-else{setState({loginLoading:false,loginError:res.error||“認証失敗”});}
-}catch(e){setState({loginLoading:false,loginError:“通信エラー: “+e.message});}
+  var email=document.getElementById("loginEmail").value.trim();
+  if(!email){setState({loginError:"メールアドレスを入力してください"});return;}
+  setState({loginLoading:true,loginError:""});
+  try{
+    var res=await apiAuth(email);
+    if(res.success){setState({user:{email:res.email,name:res.name},view:"home",loginLoading:false,loginError:""});}
+    else{setState({loginLoading:false,loginError:res.error||"認証失敗"});}
+  }catch(e){setState({loginLoading:false,loginError:"通信エラー: "+e.message});}
 }
 
 function renderHeader(){
-var tabs=[
-{id:“home”,    l:“ホーム”,    i:“⌂”},
-{id:“about”,   l:“コース説明”,i:“✿”},
-{id:“theory”,  l:“理論”,      i:“📖”},
-{id:“practice”,l:“実技”,      i:“🤲”},
-{id:“report”,  l:“報告書”,    i:“📝”},
-{id:“reports”, l:“履歴”,      i:“📋”}
-];
-return ‘<div class="header"><div class="header-top">’+
-‘<div class="header-brand"><img class="header-logo" src="'+LOGO_SRC+'" alt="澪花"> 澪花 腹部コース</div>’+
-‘<div class="header-user"><span>’+(state.user?state.user.name:””)+’</span><button onclick="setState({view:\x27login\x27,user:null})">ログアウト</button></div>’+
-‘</div><div class="tab-bar">’+
-tabs.map(function(t){
-return ‘<button class=”’+(state.view===t.id?“active”:””)+’” onclick=“nav(\x27’+t.id+’\x27)”><span>’+t.i+’</span>’+t.l+’</button>’;
-}).join(””)+
-‘</div></div>’;
+  var tabs=[
+    {id:"home",    l:"ホーム",    i:"⌂"},
+    {id:"about",   l:"コース説明",i:"✿"},
+    {id:"theory",  l:"理論",      i:"📖"},
+    {id:"practice",l:"実技",      i:"🤲"},
+    {id:"report",  l:"報告書",    i:"📝"},
+    {id:"reports", l:"履歴",      i:"📋"}
+  ];
+  return '<div class="header"><div class="header-top">'+
+    '<div class="header-brand"><img class="header-logo" src="'+LOGO_SRC+'" alt="澪花"> 澪花 腹部コース</div>'+
+    '<div class="header-user"><span>'+(state.user?state.user.name:"")+'</span><button odoLogout()>ログアウト</button></div>'+
+    '</div><div class="tab-bar">'+
+    tabs.map(function(t){
+      return '<button class="'+(state.view===t.id?"active":"")+'" onclick="nav(\x27'+t.id+'\x27)"><span>'+t.i+'</span>'+t.l+'</button>';
+    }).join("")+
+    '</div></div>';
 }
 
+function doLogout(){setState({view:'login',user:null});}
 function nav(v){
-if(v===“reports”&&!state.reportsLoaded){loadReports();}
-setState({view:v,theoryMod:null,theoryTopic:null,practiceList:true});
+  if(v==="reports"&&!state.reportsLoaded){loadReports();}
+  setState({view:v,theoryMod:null,theoryTopic:null,practiceList:true});
 }
 
 function renderHome(){
-var cards=[
-{id:“about”,   icon:“✿”,  t:“コース説明”,  d:“生徒への説明内容・指導範囲”,c:“var(–accent)”,bg:“var(–accent-light)”},
-{id:“theory”,  icon:“📖”, t:“理論教材”,    d:“自律神経・筋肉・内臓・腹診”, c:“var(–blue)”,  bg:“var(–blue-light)”},
-{id:“practice”,icon:“🤲”, t:“実技プロトコル”,d:“全34ステップの施術手順”,   c:“var(–green)”, bg:“var(–green-light)”},
-{id:“report”,  icon:“📝”, t:“指導報告書”,  d:“生徒の実技評価を記録”,       c:“var(–purple)”,bg:“var(–purple-light)”},
-{id:“reports”, icon:“📋”, t:“報告書履歴”,  d:“過去の指導記録を閲覧”,       c:“var(–gold)”,  bg:“var(–gold-light)”}
-];
-return ‘<div class="container">’+
-‘<div style="text-align:center;margin-bottom:28px">’+
-‘<img src="'+LOGO_SRC+'" style="width:80px;height:80px;object-fit:contain;margin-bottom:8px">’+
-‘<h2 style="font-size:20px;font-weight:600;margin:8px 0 4px">ようこそ、’+(state.user?state.user.name:””)+‘先生</h2>’+
-‘<p style="color:var(--sub);font-size:14px">澪花腹部コース 指導システム</p></div>’+
-‘<div class="home-grid">’+
-cards.map(function(c){
-return ‘<button class="home-card" style="background:'+c.bg+';border:1px solid '+c.c+'22" onclick="nav(\x27'+c.id+'\x27)"><span class="icon">’+c.icon+’</span><h3 style="color:'+c.c+'">’+c.t+’</h3><p>’+c.d+’</p></button>’;
-}).join(””)+
-‘</div></div>’;
+  var cards=[
+    {id:"about",   icon:"✿",  t:"コース説明",  d:"生徒への説明内容・指導範囲",c:"var(--accent)",bg:"var(--accent-light)"},
+    {id:"theory",  icon:"📖", t:"理論教材",    d:"自律神経・筋肉・内臓・腹診", c:"var(--blue)",  bg:"var(--blue-light)"},
+    {id:"practice",icon:"🤲", t:"実技プロトコル",d:"全34ステップの施術手順",   c:"var(--green)", bg:"var(--green-light)"},
+    {id:"report",  icon:"📝", t:"指導報告書",  d:"生徒の実技評価を記録",       c:"var(--purple)",bg:"var(--purple-light)"},
+    {id:"reports", icon:"📋", t:"報告書履歴",  d:"過去の指導記録を閲覧",       c:"var(--gold)",  bg:"var(--gold-light)"}
+  ];
+  return '<div class="container">'+
+    '<div style="text-align:center;margin-bottom:28px">'+
+    '<img src="'+LOGO_SRC+'" style="width:80px;height:80px;object-fit:contain;margin-bottom:8px">'+
+    '<h2 style="font-size:20px;font-weight:600;margin:8px 0 4px">ようこそ、'+(state.user?state.user.name:"")+'先生</h2>'+
+    '<p style="color:var(--sub);font-size:14px">澪花腹部コース 指導システム</p></div>'+
+    '<div class="home-grid">'+
+    cards.map(function(c){
+      return '<button class="home-card" style="background:'+c.bg+';border:1px solid '+c.c+'22" onclick="nav(\x27'+c.id+'\x27)"><span class="icon">'+c.icon+'</span><h3 style="color:'+c.c+'">'+c.t+'</h3><p>'+c.d+'</p></button>';
+    }).join("")+
+    '</div></div>';
 }
 
 function renderAbout(){
-return ‘<div class="container"><h2 class="section-title">コース説明</h2>’+
-‘<div class="card" style="text-align:center;margin-bottom:20px">’+
-‘<img src="'+LOGO_SRC+'" style="width:80px;height:80px;object-fit:contain;margin-bottom:8px">’+
-‘<h2 style="color:var(--accent);font-size:22px;font-weight:700;margin-bottom:4px">澪花 腹部コース</h2>’+
-‘<p style="color:var(--sub);font-size:16px">〜 臓に触れる 〜</p></div>’+
-‘<div class="about-section"><h3>🌸 澪花とは</h3>’+ABOUT.philosophy.map(function(p){return ‘<div class="about-point philosophy">’+p+’</div>’;}).join(””)+’</div>’+
-‘<div class="about-section"><h3>📘 腹部コースの目的</h3>’+ABOUT.purpose.map(function(p){return ‘<div class="about-point purpose">’+p+’</div>’;}).join(””)+’</div>’+
-‘<div class="about-section"><h3>💛 腹部の大切さ</h3>’+ABOUT.importance.map(function(p){return ‘<div class="about-point importance">’+p+’</div>’;}).join(””)+’</div>’+
-‘<div class="about-section"><h3>🚫 指導範囲の注意</h3>’+ABOUT.boundaries.map(function(p){return ‘<div class="about-point boundary">⚠ ‘+p+’</div>’;}).join(””)+’</div></div>’;
+  return '<div class="container"><h2 class="section-title">コース説明</h2>'+
+    '<div class="card" style="text-align:center;margin-bottom:20px">'+
+    '<img src="'+LOGO_SRC+'" style="width:80px;height:80px;object-fit:contain;margin-bottom:8px">'+
+    '<h2 style="color:var(--accent);font-size:22px;font-weight:700;margin-bottom:4px">澪花 腹部コース</h2>'+
+    '<p style="color:var(--sub);font-size:16px">〜 臓に触れる 〜</p></div>'+
+    '<div class="about-section"><h3>🌸 澪花とは</h3>'+ABOUT.philosophy.map(function(p){return '<div class="about-point philosophy">'+p+'</div>';}).join("")+'</div>'+
+    '<div class="about-section"><h3>📘 腹部コースの目的</h3>'+ABOUT.purpose.map(function(p){return '<div class="about-point purpose">'+p+'</div>';}).join("")+'</div>'+
+    '<div class="about-section"><h3>💛 腹部の大切さ</h3>'+ABOUT.importance.map(function(p){return '<div class="about-point importance">'+p+'</div>';}).join("")+'</div>'+
+    '<div class="about-section"><h3>🚫 指導範囲の注意</h3>'+ABOUT.boundaries.map(function(p){return '<div class="about-point boundary">⚠ '+p+'</div>';}).join("")+'</div></div>';
 }
 
 function renderTheory(){
-if(state.theoryTopic){
-var mod,topic;
-for(var mi=0;mi<THEORY.length;mi++){
-var t=THEORY[mi].topics.find(function(x){return x.id===state.theoryTopic;});
-if(t){mod=THEORY[mi];topic=t;break;}
-}
-if(!topic)return””;
-return ‘<div class="container"><button style="background:none;border:none;color:var(--accent);font-size:14px;margin-bottom:12px;padding:0" onclick="setState({theoryTopic:null})">← 戻る</button>’+
-‘<div class="card"><span style="font-size:13px;color:var(--accent);font-weight:600">’+mod.title+’</span>’+
-‘<h2 style="font-size:20px;font-weight:700;margin:8px 0 20px;border-bottom:2px solid var(--accent);padding-bottom:12px">’+topic.title+’</h2>’+
-topic.points.map(function(p,i){return ‘<div class="point-row"><span class="point-num">’+(i+1)+’</span><span class="point-text">’+p+’</span></div>’;}).join(””)+
-‘</div></div>’;
-}
-if(state.theoryMod){
-var m=THEORY.find(function(x){return x.id===state.theoryMod;});
-return ‘<div class="container"><button style="background:none;border:none;color:var(--accent);font-size:14px;margin-bottom:12px;padding:0" onclick="setState({theoryMod:null})">← 一覧</button>’+
-‘<div class="card"><h2 style="display:flex;align-items:center;gap:10px;font-size:20px;font-weight:700;margin-bottom:16px"><span style="font-size:28px">’+m.icon+’</span>’+m.title+’</h2>’+
-m.topics.map(function(t){
-return ‘<button style="display:flex;justify-content:space-between;align-items:center;padding:16px;background:var(--bg);border:1px solid var(--border);border-radius:12px;width:100%;text-align:left;margin-bottom:8px" onclick="setState({theoryTopic:\x27'+ t.id +'\x27})">’+
-‘<div><span style="font-size:15px;font-weight:600">’+t.title+’</span><span style="color:var(--sub);font-size:12px;margin-left:8px">’+t.points.length+‘項目</span></div><span style="color:var(--accent);font-size:18px">›</span></button>’;
-}).join(””)+
-‘</div></div>’;
-}
-return ‘<div class="container"><h2 class="section-title">理論教材</h2>’+
-THEORY.map(function(m,i){
-return ‘<button class="mod-item" onclick="setState({theoryMod:\x27'+ m.id +'\x27})">’+
-‘<div class="mod-icon">’+m.icon+’</div>’+
-‘<div style="flex:1"><div style="display:flex;align-items:center;gap:8px"><span class="mod-num">’+(i+1)+’</span><span class="mod-title">’+m.title+’</span></div>’+
-‘<p style="color:var(--sub);font-size:12px;margin:4px 0 0">’+m.topics.length+‘トピック</p></div>’+
-‘<span style="color:var(--accent);font-size:20px">›</span></button>’;
-}).join(””)+’</div>’;
+  if(state.theoryTopic){
+    var mod,topic;
+    for(var mi=0;mi<THEORY.length;mi++){
+      var t=THEORY[mi].topics.find(function(x){return x.id===state.theoryTopic;});
+      if(t){mod=THEORY[mi];topic=t;break;}
+    }
+    if(!topic)return"";
+    return '<div class="container"><button style="background:none;border:none;color:var(--accent);font-size:14px;margin-bottom:12px;padding:0" onclick="setState({theoryTopic:null})">← 戻る</button>'+
+      '<div class="card"><span style="font-size:13px;color:var(--accent);font-weight:600">'+mod.title+'</span>'+
+      '<h2 style="font-size:20px;font-weight:700;margin:8px 0 20px;border-bottom:2px solid var(--accent);padding-bottom:12px">'+topic.title+'</h2>'+
+      topic.points.map(function(p,i){return '<div class="point-row"><span class="point-num">'+(i+1)+'</span><span class="point-text">'+p+'</span></div>';}).join("")+
+      '</div></div>';
+  }
+  if(state.theoryMod){
+    var m=THEORY.find(function(x){return x.id===state.theoryMod;});
+    return '<div class="container"><button style="background:none;border:none;color:var(--accent);font-size:14px;margin-bottom:12px;padding:0" onclick="setState({theoryMod:null})">← 一覧</button>'+
+      '<div class="card"><h2 style="display:flex;align-items:center;gap:10px;font-size:20px;font-weight:700;margin-bottom:16px"><span style="font-size:28px">'+m.icon+'</span>'+m.title+'</h2>'+
+      m.topics.map(function(t){
+        return '<button style="display:flex;justify-content:space-between;align-items:center;padding:16px;background:var(--bg);border:1px solid var(--border);border-radius:12px;width:100%;text-align:left;margin-bottom:8px" data-id="'+t.id+'" onclick="setState({theoryTopic:this.dataset.id})">'+
+          '<div><span style="font-size:15px;font-weight:600">'+t.title+'</span><span style="color:var(--sub);font-size:12px;margin-left:8px">'+t.points.length+'項目</span></div><span style="color:var(--accent);font-size:18px">›</span></button>';
+      }).join("")+
+      '</div></div>';
+  }
+  return '<div class="container"><h2 class="section-title">理論教材</h2>'+
+    THEORY.map(function(m,i){
+      return '<button class="mod-item" data-id="'+m.id+'" onclick="setState({theoryMod:this.dataset.id})">'+
+        '<div class="mod-icon">'+m.icon+'</div>'+
+        '<div style="flex:1"><div style="display:flex;align-items:center;gap:8px"><span class="mod-num">'+(i+1)+'</span><span class="mod-title">'+m.title+'</span></div>'+
+        '<p style="color:var(--sub);font-size:12px;margin:4px 0 0">'+m.topics.length+'トピック</p></div>'+
+        '<span style="color:var(--accent);font-size:20px">›</span></button>';
+    }).join("")+'</div>';
 }
 
 function renderPractice(){
-if(!state.practiceList){
-var s=STEPS[state.practiceCur];
-var st=state.stepStatus[s.id]||””;
-var cm=state.stepComments[s.id]||””;
-return ‘<div class="container">’+
-‘<button style="background:none;border:none;color:var(--accent);font-size:14px;padding:0;margin-bottom:8px" onclick="setState({practiceList:true})">← 一覧</button>’+
-‘<div class="card" style="text-align:center;padding:28px 20px">’+
-‘<div class="step-dots">’+STEPS.map(function(_,i){
-var sid=STEPS[i].id;
-var ss=state.stepStatus[sid]||””;
-var col=i===state.practiceCur?“var(–accent)”:ss===“done”?“var(–green)”:ss===“recheck”?“var(–orange)”:“var(–border)”;
-return ‘<div class="step-dot" style="background:'+col+'"></div>’;
-}).join(””)+’</div>’+
-‘<span class="step-badge">’+s.cat+’</span>’+
-‘<h2 style="font-size:22px;font-weight:700;margin:8px 0 4px">Step ‘+(state.practiceCur+1)+’ / ‘+STEPS.length+’</h2>’+
-‘<h3 style="color:var(--accent);font-size:20px;font-weight:700;margin-bottom:16px">’+s.title+’</h3>’+
-(s.note?’<div style="background:var(--gold-light);border-radius:12px;padding:12px 16px;margin-bottom:16px;text-align:left"><p style="color:var(--gold);font-size:13px;font-weight:600;margin-bottom:4px">📌 ポイント</p><p style="font-size:14px;line-height:1.6">’+s.note+’</p></div>’:’’)+
-‘<div class="step-actions">’+
-‘<button class=“btn-done” style=“background:’+(st===“done”?“var(–green)”:“var(–border)”)+’;color:’+(st===“done”?”#fff”:“var(–text)”)+’” onclick=“setStepStatus(\x27’+ s.id +’\x27,\x27done\x27)”>✓ 完了</button>’+
-‘<button class=“btn-recheck” style=“background:’+(st===“recheck”?“var(–orange)”:“var(–border)”)+’;color:’+(st===“recheck”?”#fff”:“var(–text)”)+’” onclick=“setStepStatus(\x27’+ s.id +’\x27,\x27recheck\x27)”>↻ 再チェック</button>’+
-‘</div>’+
-(st===“recheck”?’<div class="step-comment-area"><p style="font-size:13px;color:var(--orange);font-weight:600;margin-bottom:4px;text-align:left">⚠ 何が出来ていないか：</p><textarea placeholder="出来ていない点、次回の注意点を入力" onchange="setStepComment(\x27'+ s.id +'\x27,this.value)">’+cm+’</textarea></div>’:’’)+
-(st===“done”&&cm?’<div style="background:var(--green-light);border-radius:10px;padding:10px 14px;margin-top:8px;text-align:left"><p style="font-size:12px;color:var(--green);font-weight:600">メモ：</p><p style="font-size:13px">’+cm+’</p></div>’:’’)+
-‘<div class="step-nav">’+
-‘<button style=“border:1px solid var(–border);background:var(–bg);color:’+(state.practiceCur===0?“var(–border)”:“var(–text)”)+’” onclick=“if(’+state.practiceCur+’>0)setState({practiceCur:’+(state.practiceCur-1)+’})” ‘+(state.practiceCur===0?“disabled”:””)+’>← 前へ</button>’+
-‘<button style=“border:none;background:’+(state.practiceCur===STEPS.length-1?“var(–border)”:“var(–accent)”)+’;color:#fff;font-weight:600” onclick=“if(’+state.practiceCur+’<’+(STEPS.length-1)+’)setState({practiceCur:’+(state.practiceCur+1)+’})” ‘+(state.practiceCur===STEPS.length-1?“disabled”:””)+’>次へ →</button>’+
-‘</div></div></div>’;
-}
-var cats={};
-STEPS.forEach(function(s,i){if(!cats[s.cat])cats[s.cat]=[];cats[s.cat].push(Object.assign({},s,{i:i}));});
-return ‘<div class="container"><h2 class="section-title">実技プロトコル</h2>’+
-‘<p style="color:var(--sub);font-size:13px;text-align:center;margin-bottom:16px">全’+STEPS.length+‘ステップ</p>’+
-Object.keys(cats).map(function(cat){
-var items=cats[cat];
-return ‘<div style="margin-bottom:14px"><h3 class="step-cat">’+cat+’</h3>’+
-items.map(function(x){
-var st=state.stepStatus[x.id]||””;
-var cls=st===“done”?“done”:st===“recheck”?“recheck”:“default”;
-return ‘<button class="step-item" onclick="setState({practiceCur:'+x.i+',practiceList:false})">’+
-‘<span class="step-num '+cls+'">’+( st===“done”?“✓”:st===“recheck”?“↻”:x.i+1)+’</span>’+
-‘<span style="flex:1;font-size:15px;font-weight:500">’+x.title+’</span>’+
-(state.stepComments[x.id]?’<span style="color:var(--orange);font-size:12px">📝</span>’:’’)+
-‘<span style="color:var(--sub);font-size:16px">›</span></button>’;
-}).join(””)+’</div>’;
-}).join(””)+’</div>’;
+  if(!state.practiceList){
+    var s=STEPS[state.practiceCur];
+    var st=state.stepStatus[s.id]||"";
+    var cm=state.stepComments[s.id]||"";
+    return '<div class="container">'+
+      '<button style="background:none;border:none;color:var(--accent);font-size:14px;padding:0;margin-bottom:8px" onclick="setState({practiceList:true})">← 一覧</button>'+
+      '<div class="card" style="text-align:center;padding:28px 20px">'+
+      '<div class="step-dots">'+STEPS.map(function(_,i){
+        var sid=STEPS[i].id;
+        var ss=state.stepStatus[sid]||"";
+        var col=i===state.practiceCur?"var(--accent)":ss==="done"?"var(--green)":ss==="recheck"?"var(--orange)":"var(--border)";
+        return '<div class="step-dot" style="background:'+col+'"></div>';
+      }).join("")+'</div>'+
+      '<span class="step-badge">'+s.cat+'</span>'+
+      '<h2 style="font-size:22px;font-weight:700;margin:8px 0 4px">Step '+(state.practiceCur+1)+' / '+STEPS.length+'</h2>'+
+      '<h3 style="color:var(--accent);font-size:20px;font-weight:700;margin-bottom:16px">'+s.title+'</h3>'+
+      (s.note?'<div style="background:var(--gold-light);border-radius:12px;padding:12px 16px;margin-bottom:16px;text-align:left"><p style="color:var(--gold);font-size:13px;font-weight:600;margin-bottom:4px">📌 ポイント</p><p style="font-size:14px;line-height:1.6">'+s.note+'</p></div>':'')+
+      '<div class="step-actions">'+
+      '<button class="btn-done" style="background:'+(st==="done"?"var(--green)":"var(--border)")+';color:'+(st==="done"?"#fff":"var(--text)")+'" data-id="'+s.id+'" onclick="setStepStatus(this.dataset.id,\'done\')">✓ 完了</button>'+
+      '<button class="btn-recheck" style="background:'+(st==="recheck"?"var(--orange)":"var(--border)")+';color:'+(st==="recheck"?"#fff":"var(--text)")+'" data-id="'+s.id+'" onclick="setStepStatus(this.dataset.id,\'recheck\')">↻ 再チェック</button>'+
+      '</div>'+
+      (st==="recheck"?'<div class="step-comment-area"><p style="font-size:13px;color:var(--orange);font-weight:600;margin-bottom:4px;text-align:left">⚠ 何が出来ていないか：</p><textarea placeholder="出来ていない点、次回の注意点を入力" data-id="'+s.id+'" onchange="setStepComment(this.dataset.id,this.value)">'+cm+'</textarea></div>':'')+
+      (st==="done"&&cm?'<div style="background:var(--green-light);border-radius:10px;padding:10px 14px;margin-top:8px;text-align:left"><p style="font-size:12px;color:var(--green);font-weight:600">メモ：</p><p style="font-size:13px">'+cm+'</p></div>':'')+
+      '<div class="step-nav">'+
+      '<button style="border:1px solid var(--border);background:var(--bg);color:'+(state.practiceCur===0?"var(--border)":"var(--text)")+'" onclick="if('+state.practiceCur+'>0)setState({practiceCur:'+(state.practiceCur-1)+'})" '+(state.practiceCur===0?"disabled":"")+'>← 前へ</button>'+
+      '<button style="border:none;background:'+(state.practiceCur===STEPS.length-1?"var(--border)":"var(--accent)")+';color:#fff;font-weight:600" onclick="if('+state.practiceCur+'<'+(STEPS.length-1)+')setState({practiceCur:'+(state.practiceCur+1)+'})" '+(state.practiceCur===STEPS.length-1?"disabled":"")+'>次へ →</button>'+
+      '</div></div></div>';
+  }
+  var cats={};
+  STEPS.forEach(function(s,i){if(!cats[s.cat])cats[s.cat]=[];cats[s.cat].push(Object.assign({},s,{i:i}));});
+  return '<div class="container"><h2 class="section-title">実技プロトコル</h2>'+
+    '<p style="color:var(--sub);font-size:13px;text-align:center;margin-bottom:16px">全'+STEPS.length+'ステップ</p>'+
+    Object.keys(cats).map(function(cat){
+      var items=cats[cat];
+      return '<div style="margin-bottom:14px"><h3 class="step-cat">'+cat+'</h3>'+
+        items.map(function(x){
+          var st=state.stepStatus[x.id]||"";
+          var cls=st==="done"?"done":st==="recheck"?"recheck":"default";
+          return '<button class="step-item" onclick="setState({practiceCur:'+x.i+',practiceList:false})">'+
+            '<span class="step-num '+cls+'">'+( st==="done"?"✓":st==="recheck"?"↻":x.i+1)+'</span>'+
+            '<span style="flex:1;font-size:15px;font-weight:500">'+x.title+'</span>'+
+            (state.stepComments[x.id]?'<span style="color:var(--orange);font-size:12px">📝</span>':'')+
+            '<span style="color:var(--sub);font-size:16px">›</span></button>';
+        }).join("")+'</div>';
+    }).join("")+'</div>';
 }
 
-function setStepStatus(id,val){var s=Object.assign({},state.stepStatus);s[id]=s[id]===val?””:val;setState({stepStatus:s});}
+function setStepStatus(id,val){var s=Object.assign({},state.stepStatus);s[id]=s[id]===val?"":val;setState({stepStatus:s});}
 function setStepComment(id,val){var c=Object.assign({},state.stepComments);c[id]=val;state.stepComments=c;}
 
 /* ===== 報告書（評価入力） ===== */
 function renderReport(){
-var evalCats={};
-EVALS.forEach(function(e){if(!evalCats[e.cat])evalCats[e.cat]=[];evalCats[e.cat].push(e);});
-var verdict=calcVerdict(state.reportScores);
-return ‘<div class="container" style="padding-bottom:40px"><h2 class="section-title">指導報告書</h2>’+
-‘<div class="card"><div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px">’+
-‘<div><label style="font-size:12px;color:var(--sub);font-weight:600">生徒名 *</label>’+
-‘<input style="width:100%;padding:10px 12px;border-radius:10px;border:1px solid var(--border);font-size:15px;background:var(--bg);margin-top:4px" value="'+state.reportStudent+'" onchange="state.reportStudent=this.value"></div>’+
-‘<div><label style="font-size:12px;color:var(--sub);font-weight:600">日付</label>’+
-‘<input type="date" style="width:100%;padding:10px 12px;border-radius:10px;border:1px solid var(--border);font-size:15px;background:var(--bg);margin-top:4px" value="'+state.reportDate+'" onchange="state.reportDate=this.value"></div></div>’+
-‘<p style="font-size:12px;color:var(--sub)">指導者：’+(state.user?state.user.name:””)+’ (’+(state.user?state.user.email:””)+’)</p></div>’+
-renderVerdictPreview(verdict)+
-Object.keys(evalCats).map(function(cat){
-var items=evalCats[cat];
-var catVerdict=verdict?verdict.catStats[cat]:null;
-var catBg=catVerdict?(catVerdict.avg<=3?“var(–red-light)”:catVerdict.avg>=4?“var(–green-light)”:””):””;
-return ‘<div class=“card” style=“border:’+(catVerdict&&catVerdict.avg<=3?“2px solid #c4505066”:“1px solid var(–border)”)+’”>’+
-‘<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">’+
-‘<h3 style="color:var(--accent);font-size:14px;font-weight:700">’+cat+’</h3>’+
-(catVerdict?’<span style=“font-size:12px;font-weight:700;color:’+(catVerdict.avg<=3?“var(–red)”:catVerdict.avg>=4?“var(–green)”:“var(–gold)”)+’”>’+catVerdict.avg.toFixed(1)+‘点</span>’:’’)+
-‘</div>’+
-items.map(function(item){
-var v=state.reportScores[item.id];
-return ‘<div class="eval-score-row">’+
-‘<p class="eval-label">’+(v&&v<=3?‘⚠ ‘:’’)+item.label+’</p>’+
-‘<div class="eval-btns">’+
-[1,2,3,4,5].map(function(sv){
-var sel=state.reportScores[item.id]===sv;
-var cls=sel?(sv<=2?“selected-low”:sv<=3?“selected-mid”:“selected-high”):“unselected”;
-return ‘<button class="eval-btn '+cls+'" onclick="setReportScore(\x27'+ item.id +'\x27,'+sv+')">’+ sv+” “+SL[sv]+’</button>’;
-}).join(””)+
-‘</div></div>’;
-}).join(””)+’</div>’;
-}).join(””)+
-‘<div class="card"><h3 style="color:var(--accent);font-size:14px;font-weight:700;margin-bottom:8px">実技ステップメモ（再チェック分）</h3>’+
-(Object.keys(state.stepComments).filter(function(k){return state.stepComments[k];}).length>0?
-Object.keys(state.stepComments).filter(function(k){return state.stepComments[k];}).map(function(id){
-var s=STEPS.find(function(x){return x.id===id;});
-var st=state.stepStatus[id]||””;
-return ‘<div style=“padding:8px 12px;background:’+(st===“recheck”?“var(–orange-light)”:“var(–green-light)”)+’;border-radius:8px;margin-bottom:6px”>’+
-‘<span style=“font-size:13px;font-weight:600;color:’+(st===“recheck”?“var(–orange)”:“var(–green)”)+’”>’+( st===“recheck”?“↻”:“✓”)+” “+(s?s.title:id)+’</span>’+
-‘<p style="font-size:13px;margin-top:2px">’+state.stepComments[id]+’</p></div>’;
-}).join(””):
-‘<p style="font-size:13px;color:var(--sub)">実技タブで記録したステップメモがここに表示されます</p>’)+
-‘</div>’+
-‘<div class="card"><h3 style="color:var(--accent);font-size:14px;font-weight:700;margin-bottom:8px">コメント・申し送り</h3>’+
-‘<textarea style="width:100%;padding:12px;border-radius:10px;border:1px solid var(--border);font-size:14px;background:var(--bg);resize:vertical;line-height:1.7;min-height:80px" placeholder="生徒への指導メモ、次回の課題など" onchange="state.reportComment=this.value">’+state.reportComment+’</textarea></div>’+
-’<button style=“width:100%;padding:16px;border-radius:14px;background:var(–accent);color:#fff;border:none;font-size:16px;font-weight:700” onclick=“saveReport()” ’+(state.saving?“disabled”:””)+”>”+(state.saving?“保存中…”:“報告書を保存（スプレッドシートへ送信）”)+”</button></div>”;
+  var evalCats={};
+  EVALS.forEach(function(e){if(!evalCats[e.cat])evalCats[e.cat]=[];evalCats[e.cat].push(e);});
+  var verdict=calcVerdict(state.reportScores);
+  return '<div class="container" style="padding-bottom:40px"><h2 class="section-title">指導報告書</h2>'+
+    '<div class="card"><div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px">'+
+    '<div><label style="font-size:12px;color:var(--sub);font-weight:600">生徒名 *</label>'+
+    '<input style="width:100%;padding:10px 12px;border-radius:10px;border:1px solid var(--border);font-size:15px;background:var(--bg);margin-top:4px" value="'+state.reportStudent+'" onchange="state.reportStudent=this.value"></div>'+
+    '<div><label style="font-size:12px;color:var(--sub);font-weight:600">日付</label>'+
+    '<input type="date" style="width:100%;padding:10px 12px;border-radius:10px;border:1px solid var(--border);font-size:15px;background:var(--bg);margin-top:4px" value="'+state.reportDate+'" onchange="state.reportDate=this.value"></div></div>'+
+    '<p style="font-size:12px;color:var(--sub)">指導者：'+(state.user?state.user.name:"")+' ('+(state.user?state.user.email:"")+')</p></div>'+
+    renderVerdictPreview(verdict)+
+    Object.keys(evalCats).map(function(cat){
+      var items=evalCats[cat];
+      var catVerdict=verdict?verdict.catStats[cat]:null;
+      var catBg=catVerdict?(catVerdict.avg<=3?"var(--red-light)":catVerdict.avg>=4?"var(--green-light)":""):"";
+      return '<div class="card" style="border:'+(catVerdict&&catVerdict.avg<=3?"2px solid #c4505066":"1px solid var(--border)")+'">'+
+        '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">'+
+        '<h3 style="color:var(--accent);font-size:14px;font-weight:700">'+cat+'</h3>'+
+        (catVerdict?'<span style="font-size:12px;font-weight:700;color:'+(catVerdict.avg<=3?"var(--red)":catVerdict.avg>=4?"var(--green)":"var(--gold)")+'">'+catVerdict.avg.toFixed(1)+'点</span>':'')+
+        '</div>'+
+        items.map(function(item){
+          var v=state.reportScores[item.id];
+          return '<div class="eval-score-row">'+
+            '<p class="eval-label">'+(v&&v<=3?'⚠ ':'')+item.label+'</p>'+
+            '<div class="eval-btns">'+
+            [1,2,3,4,5].map(function(sv){
+              var sel=state.reportScores[item.id]===sv;
+              var cls=sel?(sv<=2?"selected-low":sv<=3?"selected-mid":"selected-high"):"unselected";
+              return '<button class="eval-btn '+cls+'" data-id="'+item.id+'" data-sv="'+sv+'" onclick="setReportScore(this.dataset.id,parseInt(this.dataset.sv))">'+ sv+" "+SL[sv]+'</button>';
+            }).join("")+
+            '</div></div>';
+        }).join("")+'</div>';
+    }).join("")+
+    '<div class="card"><h3 style="color:var(--accent);font-size:14px;font-weight:700;margin-bottom:8px">実技ステップメモ（再チェック分）</h3>'+
+    (Object.keys(state.stepComments).filter(function(k){return state.stepComments[k];}).length>0?
+      Object.keys(state.stepComments).filter(function(k){return state.stepComments[k];}).map(function(id){
+        var s=STEPS.find(function(x){return x.id===id;});
+        var st=state.stepStatus[id]||"";
+        return '<div style="padding:8px 12px;background:'+(st==="recheck"?"var(--orange-light)":"var(--green-light)")+';border-radius:8px;margin-bottom:6px">'+
+          '<span style="font-size:13px;font-weight:600;color:'+(st==="recheck"?"var(--orange)":"var(--green)")+'">'+( st==="recheck"?"↻":"✓")+" "+(s?s.title:id)+'</span>'+
+          '<p style="font-size:13px;margin-top:2px">'+state.stepComments[id]+'</p></div>';
+      }).join(""):
+      '<p style="font-size:13px;color:var(--sub)">実技タブで記録したステップメモがここに表示されます</p>')+
+    '</div>'+
+    '<div class="card"><h3 style="color:var(--accent);font-size:14px;font-weight:700;margin-bottom:8px">コメント・申し送り</h3>'+
+    '<textarea style="width:100%;padding:12px;border-radius:10px;border:1px solid var(--border);font-size:14px;background:var(--bg);resize:vertical;line-height:1.7;min-height:80px" placeholder="生徒への指導メモ、次回の課題など" onchange="state.reportComment=this.value">'+state.reportComment+'</textarea></div>'+
+    '<button style="width:100%;padding:16px;border-radius:14px;background:var(--accent);color:#fff;border:none;font-size:16px;font-weight:700" onclick="saveReport()" '+(state.saving?"disabled":"")+">"+(state.saving?"保存中...":"報告書を保存（スプレッドシートへ送信）")+"</button></div>";
 }
 
 /* ===== 合格判定プレビュー（報告書入力中） ===== */
 function renderVerdictPreview(verdict){
-if(!verdict) return ‘<div class="card verdict-pending">📋 評価を入力すると合格判定が表示されます</div>’;
-var scored=Object.keys(state.reportScores).filter(function(k){return typeof state.reportScores[k]===“number”;}).length;
-var total=EVALS.length;
-var pct=Math.round(scored/total*100);
-var html=’<div class=“verdict-box ‘+(verdict.pass?“pass”:“fail”)+’”>’+
-‘<div class=“verdict-label ‘+(verdict.pass?“pass”:“fail”)+’”>’+
-(verdict.pass?“✓ 合格”:“✗ 不合格”)+’</div>’+
-(scored<total?’<div class="verdict-sub">入力済み ‘+scored+’/’+total+‘項目（’+pct+’%）</div>’:’’)+
-(!verdict.pass&&verdict.reasons.length>0?
-‘<div style="margin-top:10px;text-align:left">’+
-verdict.reasons.map(function(r){return ‘<p style="font-size:12px;color:var(--red);margin-top:4px">⚠ ‘+r+’</p>’;}).join(””)+
-‘</div>’:’’)+
-‘<div class="verdict-stats">’+
-‘<div class="verdict-stat"><div class=“num” style=“color:’+(verdict.avg>=4?“var(–green)”:“var(–red)”)+’”>’+verdict.avg.toFixed(1)+’</div><div class="lbl">総合平均</div></div>’+
-‘<div class="verdict-stat"><div class=“num” style=“color:’+(verdict.minVal>3?“var(–green)”:“var(–red)”)+’”>’+verdict.minVal+’</div><div class="lbl">最低点</div></div>’+
-‘<div class="verdict-stat"><div class="num">’+scored+’</div><div class="lbl">入力項目</div></div>’+
-‘</div></div>’;
+  if(!verdict) return '<div class="card verdict-pending">📋 評価を入力すると合格判定が表示されます</div>';
+  var scored=Object.keys(state.reportScores).filter(function(k){return typeof state.reportScores[k]==="number";}).length;
+  var total=EVALS.length;
+  var pct=Math.round(scored/total*100);
+  var html='<div class="verdict-box '+(verdict.pass?"pass":"fail")+'">'+
+    '<div class="verdict-label '+(verdict.pass?"pass":"fail")+'">'+
+    (verdict.pass?"✓ 合格":"✗ 不合格")+'</div>'+
+    (scored<total?'<div class="verdict-sub">入力済み '+scored+'/'+total+'項目（'+pct+'%）</div>':'')+
+    (!verdict.pass&&verdict.reasons.length>0?
+      '<div style="margin-top:10px;text-align:left">'+
+      verdict.reasons.map(function(r){return '<p style="font-size:12px;color:var(--red);margin-top:4px">⚠ '+r+'</p>';}).join("")+
+      '</div>':'')+
+    '<div class="verdict-stats">'+
+    '<div class="verdict-stat"><div class="num" style="color:'+(verdict.avg>=4?"var(--green)":"var(--red)")+'">'+verdict.avg.toFixed(1)+'</div><div class="lbl">総合平均</div></div>'+
+    '<div class="verdict-stat"><div class="num" style="color:'+(verdict.minVal>3?"var(--green)":"var(--red)")+'">'+verdict.minVal+'</div><div class="lbl">最低点</div></div>'+
+    '<div class="verdict-stat"><div class="num">'+scored+'</div><div class="lbl">入力項目</div></div>'+
+    '</div></div>';
 
-// ジャンル別
-html+=’<div class="genre-verdict-grid">’;
-Object.keys(verdict.catStats).forEach(function(cat){
-var cs=verdict.catStats[cat];
-var ok=cs.avg>3;
-html+=’<div class=“genre-verdict-item ‘+(ok?“ok”:“ng”)+’”>’+
-‘<div class="g-name">’+(ok?“✓ “:“⚠ “)+cat+’</div>’+
-‘<div class="g-score">’+cs.avg.toFixed(1)+’</div>’+
-‘<div class=“g-status” style=“color:’+(ok?“var(–green)”:“var(–red)”)+’”>’+(ok?“基準クリア”:“要補講”)+’</div>’+
-‘<div class="cat-bar"><div class=“cat-bar-fill” style=“width:’+(cs.avg/5*100)+’%;background:’+(ok?“var(–green)”:“var(–red)”)+’”></div></div>’+
-‘</div>’;
-});
-html+=’</div>’;
+  // ジャンル別
+  html+='<div class="genre-verdict-grid">';
+  Object.keys(verdict.catStats).forEach(function(cat){
+    var cs=verdict.catStats[cat];
+    var ok=cs.avg>3;
+    html+='<div class="genre-verdict-item '+(ok?"ok":"ng")+'">'+
+      '<div class="g-name">'+(ok?"✓ ":"⚠ ")+cat+'</div>'+
+      '<div class="g-score">'+cs.avg.toFixed(1)+'</div>'+
+      '<div class="g-status" style="color:'+(ok?"var(--green)":"var(--red)")+'">'+(ok?"基準クリア":"要補講")+'</div>'+
+      '<div class="cat-bar"><div class="cat-bar-fill" style="width:'+(cs.avg/5*100)+'%;background:'+(ok?"var(--green)":"var(--red)")+'"></div></div>'+
+      '</div>';
+  });
+  html+='</div>';
 
-// 補講対象
-if(verdict.hokou.length>0){
-html+=’<div class="hokou-list"><h3>📚 補講対象項目（スコア3以下）</h3>’+
-verdict.hokou.map(function(h){
-return ‘<div class="hokou-item">’+
-‘<span class="h-score">’+ h.score+” “+SL[h.score]+’</span>’+
-‘<span class="h-label">’+ h.label+’</span>’+
-‘<span class="h-cat">’+h.cat+’</span></div>’;
-}).join(””)+
-‘</div>’;
-}
-return html;
+  // 補講対象
+  if(verdict.hokou.length>0){
+    html+='<div class="hokou-list"><h3>📚 補講対象項目（スコア3以下）</h3>'+
+      verdict.hokou.map(function(h){
+        return '<div class="hokou-item">'+
+          '<span class="h-score">'+ h.score+" "+SL[h.score]+'</span>'+
+          '<span class="h-label">'+ h.label+'</span>'+
+          '<span class="h-cat">'+h.cat+'</span></div>';
+      }).join("")+
+      '</div>';
+  }
+  return html;
 }
 
 function setReportScore(id,v){
-var s=Object.assign({},state.reportScores);
-s[id]=s[id]===v?undefined:v;
-setState({reportScores:s});
+  var s=Object.assign({},state.reportScores);
+  s[id]=s[id]===v?undefined:v;
+  setState({reportScores:s});
 }
 
 async function saveReport(){
-if(!state.reportStudent.trim()){alert(“生徒名を入力してください”);return;}
-setState({saving:true});
-try{
-var data={
-date:state.reportDate,
-instructor_email:state.user.email,
-instructor_name:state.user.name,
-student_name:state.reportStudent.trim(),
-scores:state.reportScores,
-step_notes:state.stepComments,
-comment:state.reportComment
-};
-var res=await apiSaveReport(data);
-if(res.success){
-alert(“報告書をスプレッドシートに保存しました”);
-setState({saving:false,reportScores:{},reportStudent:””,reportComment:””,stepStatus:{},stepComments:{},view:“reports”,reportsLoaded:false});
-loadReports();
-}else{alert(“保存エラー: “+(res.error||“不明”));setState({saving:false});}
-}catch(e){alert(“通信エラー: “+e.message);setState({saving:false});}
+  if(!state.reportStudent.trim()){alert("生徒名を入力してください");return;}
+  setState({saving:true});
+  try{
+    var data={
+      date:state.reportDate,
+      instructor_email:state.user.email,
+      instructor_name:state.user.name,
+      student_name:state.reportStudent.trim(),
+      scores:state.reportScores,
+      step_notes:state.stepComments,
+      comment:state.reportComment
+    };
+    var res=await apiSaveReport(data);
+    if(res.success){
+      alert("報告書をスプレッドシートに保存しました");
+      setState({saving:false,reportScores:{},reportStudent:"",reportComment:"",stepStatus:{},stepComments:{},view:"reports",reportsLoaded:false});
+      loadReports();
+    }else{alert("保存エラー: "+(res.error||"不明"));setState({saving:false});}
+  }catch(e){alert("通信エラー: "+e.message);setState({saving:false});}
 }
 
 async function loadReports(){
-try{
-var email=state.user.email;
-if(email===“wellness.soar@gmail.com”){email=null;}
-var res=await apiGetReports(email);
-if(res.success){setState({reports:res.reports,reportsLoaded:true});}
-}catch(e){console.error(e);setState({reportsLoaded:true});}
+  try{
+    var email=state.user.email;
+    if(email==="wellness.soar@gmail.com"){email=null;}
+    var res=await apiGetReports(email);
+    if(res.success){setState({reports:res.reports,reportsLoaded:true});}
+  }catch(e){console.error(e);setState({reportsLoaded:true});}
 }
 
 /* ===== 履歴・詳細 ===== */
 function renderReports(){
-if(!state.reportsLoaded) return ‘<div class="container"><p style="text-align:center;color:var(--sub);padding:40px">読み込み中…</p></div>’;
-if(state.selectedReport) return renderReportDetail(state.selectedReport);
-return ‘<div class="container"><h2 class="section-title">指導報告書 履歴</h2>’+
-(state.reports.length===0?
-‘<div style="text-align:center;padding:40px;color:var(--sub)"><p style="font-size:32px;margin-bottom:8px">📋</p><p>まだ報告書がありません</p></div>’:
-‘<div style="display:flex;flex-direction:column;gap:8px">’+
-state.reports.map(function(r){
-var verdict=calcVerdict(r.scores||{});
-var avg=verdict?verdict.avg.toFixed(1):”—”;
-var pass=verdict?verdict.pass:null;
-return ‘<button style=“display:flex;align-items:center;gap:14px;padding:16px;background:var(–card);border:1px solid ‘+(pass===true?”#5a8a5e55”:pass===false?”#c4505055”:“var(–border)”)+’;border-radius:14px;text-align:left;width:100%” onclick=“selectReport(JSON.parse(this.dataset.r))” data-r='’+JSON.stringify(r).replace(/’/g,”'”)+’'>’+
-‘<div style=“width:44px;height:44px;border-radius:22px;background:’+(pass===true?“var(–green-light)”:pass===false?“var(–red-light)”:“var(–accent-light)”)+’;display:flex;align-items:center;justify-content:center;flex-shrink:0”>’+
-‘<span style=“font-size:14px;font-weight:700;color:’+(pass===true?“var(–green)”:pass===false?“var(–red)”:“var(–accent)”)+’”>’+
-(pass===true?“合格”:pass===false?“不合格”:avg)+’</span></div>’+
-‘<div style="flex:1"><span style="font-size:15px;font-weight:700">’+r.student_name+’</span>’+
-‘<div style="display:flex;gap:8px;margin-top:2px"><span style="color:var(--sub);font-size:12px">’+r.date+’</span><span style="color:var(--sub);font-size:12px">by ‘+r.instructor_name+’</span></div></div>’+
-‘<span style="color:var(--accent);font-size:18px">›</span></button>’;
-}).join(””)+’</div>’)+’</div>’;
+  if(!state.reportsLoaded) return '<div class="container"><p style="text-align:center;color:var(--sub);padding:40px">読み込み中...</p></div>';
+  if(state.selectedReport) return renderReportDetail(state.selectedReport);
+  return '<div class="container"><h2 class="section-title">指導報告書 履歴</h2>'+
+    (state.reports.length===0?
+      '<div style="text-align:center;padding:40px;color:var(--sub)"><p style="font-size:32px;margin-bottom:8px">📋</p><p>まだ報告書がありません</p></div>':
+      '<div style="display:flex;flex-direction:column;gap:8px">'+
+      state.reports.map(function(r){
+        var verdict=calcVerdict(r.scores||{});
+        var avg=verdict?verdict.avg.toFixed(1):"—";
+        var pass=verdict?verdict.pass:null;
+        return '<button style="display:flex;align-items:center;gap:14px;padding:16px;background:var(--card);border:1px solid '+(pass===true?"#5a8a5e55":pass===false?"#c4505055":"var(--border)")+';border-radius:14px;text-align:left;width:100%" onclick="selectReport(JSON.parse(this.dataset.r))" data-r=\''+JSON.stringify(r).replace(/'/g,"&#39;")+'\'>'+
+          '<div style="width:44px;height:44px;border-radius:22px;background:'+(pass===true?"var(--green-light)":pass===false?"var(--red-light)":"var(--accent-light)")+';display:flex;align-items:center;justify-content:center;flex-shrink:0">'+
+          '<span style="font-size:14px;font-weight:700;color:'+(pass===true?"var(--green)":pass===false?"var(--red)":"var(--accent)")+'">'+
+          (pass===true?"合格":pass===false?"不合格":avg)+'</span></div>'+
+          '<div style="flex:1"><span style="font-size:15px;font-weight:700">'+r.student_name+'</span>'+
+          '<div style="display:flex;gap:8px;margin-top:2px"><span style="color:var(--sub);font-size:12px">'+r.date+'</span><span style="color:var(--sub);font-size:12px">by '+r.instructor_name+'</span></div></div>'+
+          '<span style="color:var(--accent);font-size:18px">›</span></button>';
+      }).join("")+'</div>')+'</div>';
 }
 
 function renderReportDetail(r){
-var scores=r.scores||{};
-var stepNotes=r.step_notes||{};
-var verdict=calcVerdict(scores);
-var avg=verdict?verdict.avg.toFixed(1):”—”;
-return ‘<div class="container"><button style="background:none;border:none;color:var(--accent);font-size:14px;padding:0;margin-bottom:12px" onclick="setState({selectedReport:null})">← 一覧</button>’+
-‘<div class="card">’+
-‘<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px">’+
-‘<div><h2 style="font-size:20px;font-weight:700">’+r.student_name+’</h2><p style="color:var(--sub);font-size:13px;margin-top:4px">’+r.date+’ ─ 指導者: ‘+r.instructor_name+’</p></div>’+
-‘<div style=“background:’+(verdict?verdict.pass?“var(–green-light)”:“var(–red-light)”:“var(–accent-light)”)+’;border-radius:12px;padding:8px 16px;text-align:center”>’+
-‘<span style=“font-size:16px;font-weight:700;color:’+(verdict?verdict.pass?“var(–green)”:“var(–red)”:“var(–accent)”)+’”>’+
-(verdict?verdict.pass?“✓ 合格”:“✗ 不合格”:avg)+’</span>’+
-‘<span style="font-size:11px;color:var(--sub);display:block">平均 ‘+avg+’</span></div></div>’+
-EVALS.map(function(item){
-var v=scores[item.id];
-if(!v)return””;
-var col=v<=2?“var(–red)”:v<=3?“var(–gold)”:“var(–green)”;
-return ‘<div class="report-score-row">’+
-‘<span style="font-size:13px">’+(v<=3?“⚠ “:””)+item.label+’</span>’+
-‘<span style="color:'+col+';font-weight:700;font-size:13px">’+ v+” “+SL[v]+’</span></div>’;
-}).join(””)+’</div>’+
-(verdict?renderVerdictDetail(verdict):’’)+
-(Object.keys(stepNotes).filter(function(k){return stepNotes[k];}).length>0?
-‘<div class="card"><h3 style="color:var(--orange);font-size:14px;font-weight:700;margin-bottom:8px">実技ステップメモ</h3>’+
-Object.keys(stepNotes).filter(function(k){return stepNotes[k];}).map(function(id){
-var s=STEPS.find(function(x){return x.id===id;});
-return ‘<div style="padding:8px 12px;background:var(--orange-light);border-radius:8px;margin-bottom:6px">’+
-‘<span style="font-size:13px;font-weight:600;color:var(--orange)">’+( s?s.title:id)+’</span>’+
-‘<p style="font-size:13px;margin-top:2px">’+stepNotes[id]+’</p></div>’;
-}).join(””)+’</div>’:’’)+
-(r.comment?’<div class="card"><p style="color:var(--accent);font-size:13px;font-weight:600;margin-bottom:4px">コメント</p><p style="font-size:14px;line-height:1.7;white-space:pre-wrap">’+r.comment+’</p></div>’:’’)+
-‘</div>’;
+  var scores=r.scores||{};
+  var stepNotes=r.step_notes||{};
+  var verdict=calcVerdict(scores);
+  var avg=verdict?verdict.avg.toFixed(1):"—";
+  return '<div class="container"><button style="background:none;border:none;color:var(--accent);font-size:14px;padding:0;margin-bottom:12px" onclick="setState({selectedReport:null})">← 一覧</button>'+
+    '<div class="card">'+
+    '<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px">'+
+    '<div><h2 style="font-size:20px;font-weight:700">'+r.student_name+'</h2><p style="color:var(--sub);font-size:13px;margin-top:4px">'+r.date+' ─ 指導者: '+r.instructor_name+'</p></div>'+
+    '<div style="background:'+(verdict?verdict.pass?"var(--green-light)":"var(--red-light)":"var(--accent-light)")+';border-radius:12px;padding:8px 16px;text-align:center">'+
+    '<span style="font-size:16px;font-weight:700;color:'+(verdict?verdict.pass?"var(--green)":"var(--red)":"var(--accent)")+'">'+
+    (verdict?verdict.pass?"✓ 合格":"✗ 不合格":avg)+'</span>'+
+    '<span style="font-size:11px;color:var(--sub);display:block">平均 '+avg+'</span></div></div>'+
+    EVALS.map(function(item){
+      var v=scores[item.id];
+      if(!v)return"";
+      var col=v<=2?"var(--red)":v<=3?"var(--gold)":"var(--green)";
+      return '<div class="report-score-row">'+
+        '<span style="font-size:13px">'+(v<=3?"⚠ ":"")+item.label+'</span>'+
+        '<span style="color:'+col+';font-weight:700;font-size:13px">'+ v+" "+SL[v]+'</span></div>';
+    }).join("")+'</div>'+
+    (verdict?renderVerdictDetail(verdict):'')+
+    (Object.keys(stepNotes).filter(function(k){return stepNotes[k];}).length>0?
+      '<div class="card"><h3 style="color:var(--orange);font-size:14px;font-weight:700;margin-bottom:8px">実技ステップメモ</h3>'+
+      Object.keys(stepNotes).filter(function(k){return stepNotes[k];}).map(function(id){
+        var s=STEPS.find(function(x){return x.id===id;});
+        return '<div style="padding:8px 12px;background:var(--orange-light);border-radius:8px;margin-bottom:6px">'+
+          '<span style="font-size:13px;font-weight:600;color:var(--orange)">'+( s?s.title:id)+'</span>'+
+          '<p style="font-size:13px;margin-top:2px">'+stepNotes[id]+'</p></div>';
+      }).join("")+'</div>':'')+
+    (r.comment?'<div class="card"><p style="color:var(--accent);font-size:13px;font-weight:600;margin-bottom:4px">コメント</p><p style="font-size:14px;line-height:1.7;white-space:pre-wrap">'+r.comment+'</p></div>':'')+
+    '</div>';
 }
 
 function renderVerdictDetail(verdict){
-var html=’<div class="genre-verdict-grid">’;
-Object.keys(verdict.catStats).forEach(function(cat){
-var cs=verdict.catStats[cat];
-var ok=cs.avg>3;
-html+=’<div class=“genre-verdict-item ‘+(ok?“ok”:“ng”)+’”>’+
-‘<div class="g-name">’+(ok?“✓ “:“⚠ “)+cat+’</div>’+
-‘<div class="g-score">’+cs.avg.toFixed(1)+’</div>’+
-‘<div class=“g-status” style=“color:’+(ok?“var(–green)”:“var(–red)”)+’”>’+(ok?“クリア”:“要補講”)+’</div>’+
-‘<div class="cat-bar"><div class=“cat-bar-fill” style=“width:’+(cs.avg/5*100)+’%;background:’+(ok?“var(–green)”:“var(–red)”)+’”></div></div>’+
-‘</div>’;
-});
-html+=’</div>’;
-if(verdict.hokou.length>0){
-html+=’<div class="hokou-list"><h3>📚 補講対象項目（スコア3以下）</h3>’+
-verdict.hokou.map(function(h){
-return ‘<div class="hokou-item">’+
-‘<span class="h-score">’+ h.score+” “+SL[h.score]+’</span>’+
-‘<span class="h-label">’+ h.label+’</span>’+
-‘<span class="h-cat">’+h.cat+’</span></div>’;
-}).join(””)+’</div>’;
-}
-return html;
+  var html='<div class="genre-verdict-grid">';
+  Object.keys(verdict.catStats).forEach(function(cat){
+    var cs=verdict.catStats[cat];
+    var ok=cs.avg>3;
+    html+='<div class="genre-verdict-item '+(ok?"ok":"ng")+'">'+
+      '<div class="g-name">'+(ok?"✓ ":"⚠ ")+cat+'</div>'+
+      '<div class="g-score">'+cs.avg.toFixed(1)+'</div>'+
+      '<div class="g-status" style="color:'+(ok?"var(--green)":"var(--red)")+'">'+(ok?"クリア":"要補講")+'</div>'+
+      '<div class="cat-bar"><div class="cat-bar-fill" style="width:'+(cs.avg/5*100)+'%;background:'+(ok?"var(--green)":"var(--red)")+'"></div></div>'+
+      '</div>';
+  });
+  html+='</div>';
+  if(verdict.hokou.length>0){
+    html+='<div class="hokou-list"><h3>📚 補講対象項目（スコア3以下）</h3>'+
+      verdict.hokou.map(function(h){
+        return '<div class="hokou-item">'+
+          '<span class="h-score">'+ h.score+" "+SL[h.score]+'</span>'+
+          '<span class="h-label">'+ h.label+'</span>'+
+          '<span class="h-cat">'+h.cat+'</span></div>';
+      }).join("")+'</div>';
+  }
+  return html;
 }
 
 function selectReport(r){setState({selectedReport:r});}
 
 render();
 </script>
-
 </body>
 </html>
